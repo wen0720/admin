@@ -1,0 +1,55 @@
+@import 'config';
+
+ul.menubox{    
+    display: none;
+    position: absolute;
+    background: #fff;
+    right: 0;
+    box-shadow: 1px 2px 10px 0 #9B9B9B;
+    border-radius: 2px;
+    transform: translateY(5px);
+    li{
+        padding: 10px 30px;
+        text-align: center;
+    }    
+}
+
+.select{ 
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;    
+    display: inline-block;
+    vertical-align: middle;
+    &.border-dark{
+        border: 1px solid #000000;
+    }
+    &.bg-light{
+        background: #fff;
+    }
+}
+
+.table{
+    width: 100%;
+    font-size: 14px;
+    .tableTitle{    
+        font-size: 16px;    
+        background: #fff;
+        line-height: 40px;
+        th{
+            text-align: left;
+            font-weight: bold;
+            padding: 0 0 0 20px;
+            @for $i from 1 through 7{
+                &:nth-child(#{$i}){
+                    width: map-get($tableWidth, "col#{$i}" ) + % ;
+                }
+            }
+        }
+    }
+    tbody{
+        td{
+            vertical-align: top;
+            padding: 20px;
+        }
+    }
+}

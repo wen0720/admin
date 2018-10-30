@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin Order</title>
+    <link rel="stylesheet" href="css/m.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <nav>                
+                <h1>Shoptime</h1>
+                <ul>                        
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Orders</a></li>
+                    <li><a href="#">Product</a></li>
+                </ul>                
+                <div class="login"><a href="#">ADMIN</a></div>
+            </nav>
+        </header>
+        <div class="container">
+            <!-- <div class="row"> -->
+                <div class="title">
+                    <h2>OVERVIEW</h2>
+                    <div class="date">
+                        <div class="district">
+                            <span>2018/6/6</span>
+                            <div class="tri"></div>
+                            <span>2018/6/13</span>
+                        </div>
+                        <div class="fliter">
+                            <div class="active light">weekly <div class="triDown"></div></div>
+                            <ul class="menubox">
+                                <li>Daily</li>
+                                <li>Weekly</li>
+                                <li>Monthly</li>
+                                <li>Yearly</li>
+                                <li>Custom</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <!-- </div> -->
+            <div class="row view">
+                <div class="box01">
+                    <div class="innerBox01 bg01">
+                        <div class="overView">
+                            <p><img src="images/icon-revenue.png" alt=""><span>TOTAL REVENUE</span></p>
+                            <p class="color-1">54,540</p>
+                        </div>
+                    </div>
+                    <div class="innerBox01 bg01">
+                        <div class="overView">
+                            <p><img src="images/icon-cost.png" alt=""><span>TOTAL COST</span></p>
+                            <p class="color-2">54,540</p>
+                        </div>
+                    </div>
+                    <div class="innerBox01 bg01">
+                        <div class="overView">
+                            <p><img src="images/icon-income.png" alt=""><span>TOTAL INCOME</span></p>
+                            <p class="color-3">54,540</p>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="box02 bg01">
+                    <div class="title">
+                        <h2>Activity</h2>
+                    </div>
+                    <canvas id="lineChart"></canvas>                
+                </div>
+            </div>
+            <div class="row">
+                <div class="box01">
+                    <div class="innerBox01 bg01">
+                        <div class="title">
+                            <h2>Transaction Website</h2>
+                        </div>                        
+                        <ul>
+                            <li class="flex list__borderBottom justify-sb align-center">
+                                <div class="imgBox">
+                                    <img src="images/icon-fb.png" alt="">
+                                    <p>Facebook.com</p>
+                                </div>                                                             
+                                <p>45,836</p>
+                                <div class="plus">
+                                    <img src="images/icon-arrowUp.png" alt="">
+                                    <span>20%</span>
+                                </div>
+                            </li>
+                            <li class="flex list__borderBottom justify-sb align-center">
+                                <div class="imgBox">
+                                    <img src="images/icon-google.png" alt="">
+                                    <p>Facebook.com</p>
+                                </div>                                                             
+                                <p>45,836</p>
+                                <div class="plus">
+                                    <img src="images/icon-arrowUp.png" alt="">
+                                    <span>20%</span>
+                                </div>
+                            </li>
+                            <li class="flex list__borderBottom justify-sb align-center">
+                                <div class="imgBox">
+                                    <img src="images/icon-shopify.png" alt="">
+                                    <p>Facebook.com</p>
+                                </div>                                                             
+                                <p>45,836</p>
+                                <div class="plus">
+                                    <img src="images/icon-arrowDown.png" alt="">
+                                    <span>20%</span>
+                                </div>
+                            </li>
+                            <li class="flex list__borderBottom justify-sb align-center last">
+                                <div class="imgBox">
+                                    <img src="images/icon-wordPress.jpg" alt="">
+                                    <p>Facebook.com</p>
+                                </div>                                                             
+                                <p>45,836</p>
+                                <div class="plus">
+                                    <img src="images/icon-arrowUp.png" alt="">
+                                    <span>20%</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="innerBox01 bg01">
+                        <div class="title">
+                            <h2>Latest Orders</h2>
+                        </div>                                                  
+                        <ul class="orderList">
+                            <li class="flex list__borderBottom justify-left align-end sm">
+                                <figure>
+                                    <img src="https://fakeimg.pl/100x100/eeeeee/">
+                                </figure>
+                                <div class="txtBox align-s-center">
+                                    <h3>Vintage T-shirt</h3>
+                                    <p>
+                                        <img src="images/icon-time.png" alt="">
+                                        <span>2018/06/13 13:42</span>
+                                    </p>
+                                    <p>
+                                        <img src="images/icon-people.png" alt="">
+                                        <span>Belle Willis</span>
+                                    </p>
+                                </div>
+                                <div class="sum mg-l-auto">
+                                    <p>Total</p>
+                                    <p>3,200</p>
+                                </div>
+                            </li>
+                            <li class="flex list__borderBottom justify-left align-end sm">
+                                <figure>
+                                    <img src="https://fakeimg.pl/100x100/eeeeee/">
+                                </figure>
+                                <div class="txtBox align-s-center">
+                                    <h3>Vintage T-shirt</h3>
+                                    <p>
+                                        <img src="images/icon-time.png" alt="">
+                                        <span>2018/06/13 13:42</span>
+                                    </p>
+                                    <p>
+                                        <img src="images/icon-people.png" alt="">
+                                        <span>Belle Willis</span>
+                                    </p>
+                                </div>
+                                <div class="sum mg-l-auto">
+                                    <p>Total</p>
+                                    <p>3,200</p>
+                                </div>
+                            </li>
+                            <li class="flex list__borderBottom justify-left align-end sm last">
+                                <figure>
+                                    <img src="https://fakeimg.pl/100x100/eeeeee/">
+                                </figure>
+                                <div class="txtBox">
+                                    <h3>Vintage T-shirt</h3>
+                                    <p>
+                                        <img src="images/icon-time.png" alt="">
+                                        <span>2018/06/13 13:42</span>
+                                    </p>
+                                    <p>
+                                        <img src="images/icon-people.png" alt="">
+                                        <span>Belle Willis</span>
+                                    </p>
+                                </div>
+                                <div class="sum mg-l-auto">
+                                    <p>Total</p>
+                                    <p>3,200</p>
+                                </div>
+                            </li>
+                        </ul>                    
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>     -->
+    <script src="dist/bundle.js"></script>
+    <script>        
+        let xhr = new XMLHttpRequest();                
+        var myPromise1 = new Promise(function(resolve, reject){                                    
+                xhr.open('GET','http://localhost:3000/comments')                
+                xhr.setRequestHeader('Content-type', 'application/json')                
+                xhr.send();        
+                xhr.onload = function (){                    
+                    if(xhr.status === 200){
+                        resolve({
+                            data: xhr.responseText,
+                            success: '成功拿到資料'
+                        })                                                       
+                    }else{
+                        reject('連線錯誤')
+                    }
+                }                        
+            });        
+        myPromise1.then(function(res){
+            //資料處理程式碼...
+            if(xhr.responseText){                
+                console.log(res)
+            }else{                
+                console.log(res)
+            }
+        });
+                      
+    </script>
+</body>
+</html>

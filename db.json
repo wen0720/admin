@@ -1,0 +1,43 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "yo"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "title": "IamTitle",
+      "author": "me"
+    },
+    {
+      "id": 2,
+      "title": "newPost4",
+      "author": "tim"
+    },
+    {
+      "id": 3,
+      "title": "newPost4",
+      "author": "tim"
+    },
+    {
+      "id": 4,
+      "title": "n1ewPost4",
+      "author": "tim"
+    },
+    {
+      "id": 5,
+      "title": "newPost4",
+      "author": "tim"
+    }
+  ],
+  "puys": [
+    {
+      "id": 1,
+      "title": "justTest",
+      "author": "tired"
+    }
+  ]
+}
