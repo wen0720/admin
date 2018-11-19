@@ -1,7 +1,10 @@
 const chartJs = require('chart.js');
 
-function drawChart(){            
-    let ctx = document.getElementById('lineChart').getContext('2d');
+function drawChart(){
+    if(!document.getElementById('lineChart')){
+        return;
+    }            
+    let ctx = document.getElementById('lineChart').getContext('2d');    
     var chart = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',

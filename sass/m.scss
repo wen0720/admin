@@ -1,6 +1,7 @@
 @import 'default';
 @import 'config';
 @import 'mixins';
+@import 'form';
 @import 'animate';
 @import 'layout';
 @import 'component';
@@ -47,6 +48,13 @@
             font-size: 14px;
             font-weight: bold;
         }        
+        &.bg-dark{
+            font-size: 14px;
+            font-weight:bold;
+            background: #000;
+            color:#fff;
+            padding: 6px 10px;
+        }
     }    
 }
 
@@ -88,6 +96,10 @@
             }
             img{
                 max-width: 30px;            
+            }
+            i{
+                font-size: 22px;
+                vertical-align: middle;
             }
         }    
         p:nth-child(2){

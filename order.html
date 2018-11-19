@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Order</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" href="css/m.min.css">
 </head>
 <body>
@@ -13,32 +14,94 @@
             <nav>                
                 <h1>Shoptime</h1>
                 <ul>                        
-                    <li><a href="#">HOME</a></li>
-                    <li><a href="#">ORDERS</a></li>
-                    <li><a href="#">PRODUCT</a></li>
+                    <li><a href="./index.html">HOME</a></li>
+                    <li><a href="./order.html">ORDERS</a></li>
+                    <li><a href="./product.html">PRODUCT</a></li>
                 </ul>                
                 <div class="login"><a href="#">ADMIN</a></div>
             </nav>
         </header>
         <div class="container">            
             <div class="title">                
-                <div class="selectBox">
-                    <div class="select border-dark"></div>
-                    <div class="triDown dark"></div>
-                </div>
-                <div class="date">                    
-                    <div class="fliter">
-                        <div class="active dark">EDIT SECTION<div class="triDown dark"></div></div>
-                        <ul class="menubox">
-                            <li><span></span>Order ID</li>
-                            <li>Customer</li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="selectBox js-menu">                    
+                    <div class="check__txt">
+                        <input type="checkbox" id="all" name="all" value="" />
+                        <label for="all"><span class="margin0"></span></label>
+                        <div class="triDown dark"></div>
+                    </div>                     
+                    <ul class="menubox ulli left">
+                        <li>Daily</li>
+                        <li>Weekly</li>
+                        <li>Monthly</li>
+                        <li>Yearly</li>
+                        <li>Custom</li>
+                    </ul>
+                </div>                
+                <div class="fliter js-menu">
+                    <div class="active dark">EDIT SECTION<div class="triDown dark"></div></div>
+                    <ul class="menubox check"  id="test">
+                        <li>
+                            <div class="check__txt">
+                                <input type="checkbox" id="ID" name="orderId" value="" />
+                                <label for="ID"><span></span>
+                                    <p>Customer</p>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check__txt">
+                                <input type="checkbox" id="product" name="product" value="" />
+                                <label for="product"><span></span>
+                                    <p>Product List</p>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check__txt">
+                                <input type="checkbox" id="total" name="total" value="" />
+                                <label for="total"><span></span>
+                                    <p>Total</p>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check__txt">
+                                <input type="checkbox" id="addTime" name="addTime" value="" />
+                                <label for="addTime"><span></span>
+                                    <p>Add to Cart</p>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check__txt">
+                                <input type="checkbox" id="checkOutTime" name="checkOutTime" value="" />
+                                <label for="checkOutTime"><span></span>
+                                    <p>Check-out</p>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check__txt">
+                                <input type="checkbox" id="address" name="address" value="" />
+                                <label for="address"><span></span>
+                                    <p>Address</p>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="check__txt">
+                                <input type="checkbox" id="status" name="status" value="" />
+                                <label for="status"><span></span>
+                                    <p>Status</p>
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>                
             </div>
             <div class="table">
                 <table class="table">
-                    <thead class="tableTitle">
+                    <thead class="tableTitle style1">
                         <tr>
                             <th>Customer</th>
                             <th>Product thst</th>
@@ -51,7 +114,14 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><div class="select bg-light"></div><span>Ian Medina</span></td>
+                            <td>
+                                <div class="check__txt">
+                                    <input type="checkbox" id="od01" name="od01" value="" />
+                                    <label for="od01"><span class="bg-light"></span>                                        
+                                        <p>Ian Medina</p>
+                                    </label>
+                                </div>                                
+                            </td>
                             <td>
                                 <ul class="tdlist">
                                     <li>
@@ -68,10 +138,29 @@
                             <td><p>2018/6/8 13:39</p></td>
                             <td><p>2018/6/8 20:23</p></td>
                             <td><p>386 Winder Drives Apt. 358</p></td>
-                            <td><div class="btn paid"><span>PAID</span><div class="triDown light"></div></div></td>
+                            <td>
+                                <div class="btn paid js-menu">
+                                    <span class="js-menuTxt">PAID</span>
+                                    <div class="triDown light"></div>
+                                    <ul class="menubox ulli left">
+                                        <li>Daily</li>
+                                        <li>Weekly</li>
+                                        <li>Monthly</li>
+                                        <li>Yearly</li>
+                                        <li>Custom</li>
+                                    </ul>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
-                            <td><div class="select bg-light"></div><span>Ian Medina</span></td>
+                            <td>
+                                <div class="check__txt">
+                                    <input type="checkbox" id="od02" name="od02" value="" />
+                                    <label for="od02"><span class="bg-light"></span>                                        
+                                        <p>Ian Medina</p>
+                                    </label>
+                                </div>      
+                            </td>
                             <td>
                                 <ul class="tdlist">
                                     <li>
@@ -95,7 +184,14 @@
                             <td><div class="btn ship"><span>SHIPPING</span><div class="triDown light"></div></div></td>
                         </tr>
                         <tr class="delete">
-                            <td><div class="select bg-light"></div><span>Ian Medina</span></td>
+                            <td>
+                                <div class="check__txt">
+                                    <input type="checkbox" id="od03" name="od03" value=""/>
+                                    <label for="od03"><span class="bg-light"></span>                                        
+                                        <p>Ian Medina</p>
+                                    </label>
+                                </div>
+                            </td>
                             <td>
                                 <ul class="tdlist">
                                     <li>
@@ -115,7 +211,14 @@
                             <td><div class="btn done"><span>DONE</span><div class="triDown light"></div></div></td>
                         </tr>
                         <tr class="unpaid">
-                            <td><div class="select bg-light"></div><span>Ian Medina</span></td>
+                            <td>
+                                <div class="check__txt">
+                                    <input type="checkbox" id="od04" name="od04" value=""/>
+                                    <label for="od04"><span class="bg-light"></span>                                        
+                                        <p>Ian Medina</p>
+                                    </label>
+                                </div>
+                            </td>
                             <td>
                                 <ul class="tdlist">
                                     <li>
@@ -139,16 +242,17 @@
             </div>
             <div class="pagelist">
                 <ul>
-                    <li><<</li>
+                    <li><i class="fas fa-angle-double-left"></i></li>
                     <li class="on">1</li>
                     <li>2</li>
                     <li>3</li>
                     <li>4</li>
                     <li>5</li>
-                    <li>>></li>
+                    <li><i class="fas fa-angle-double-right"></i></li>
                 </ul>
             </div>
         </div>
     </div> 
+    <script src="dist/bundle.js"></script>
 </body>
 </html>

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin Order</title>
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" href="css/m.min.css">
 </head>
 <body>
@@ -13,9 +14,9 @@
             <nav>                
                 <h1>Shoptime</h1>
                 <ul>                        
-                    <li><a href="#">HOME</a></li>
-                    <li><a href="#">ORDERS</a></li>
-                    <li><a href="#">PRODUCT</a></li>
+                    <li><a href="./index.html">HOME</a></li>
+                    <li><a href="./order.html">ORDERS</a></li>
+                    <li><a href="./product.html">PRODUCT</a></li>
                 </ul>                
                 <div class="login"><a href="#">ADMIN</a></div>
             </nav>
@@ -30,9 +31,9 @@
                             <div class="tri"></div>
                             <span>2018/6/13</span>
                         </div>
-                        <div class="fliter">
+                        <div class="fliter js-menu">
                             <div class="active light">weekly <div class="triDown dark"></div></div>
-                            <ul class="menubox">
+                            <ul class="menubox ulli">
                                 <li>Daily</li>
                                 <li>Weekly</li>
                                 <li>Monthly</li>
@@ -47,19 +48,28 @@
                 <div class="box01">
                     <div class="innerBox01 bg01">
                         <div class="overView">
-                            <p><img src="images/icon-revenue.png" alt=""><span>TOTAL REVENUE</span></p>
+                            <p>                                
+                                <i class="fas fa-hand-holding-usd"></i>
+                                <span>TOTAL REVENUE</span>
+                            </p>
                             <p class="color-1">54,540</p>
                         </div>
                     </div>
                     <div class="innerBox01 bg01">
                         <div class="overView">
-                            <p><img src="images/icon-cost.png" alt=""><span>TOTAL COST</span></p>
+                            <p>
+                                <i class="fas fa-yen-sign"></i>                                
+                                <span>TOTAL COST</span>
+                            </p>
                             <p class="color-2">54,540</p>
                         </div>
                     </div>
                     <div class="innerBox01 bg01">
                         <div class="overView">
-                            <p><img src="images/icon-income.png" alt=""><span>TOTAL INCOME</span></p>
+                            <p>
+                                <i class="far fa-money-bill-alt"></i>
+                                <span>TOTAL INCOME</span>
+                            </p>
                             <p class="color-3">54,540</p>
                         </div>
                     </div>
@@ -201,17 +211,17 @@
     <script src="dist/bundle.js"></script>
     <script>        
         let xhr = new XMLHttpRequest();                
-        var myPromise1 = new Promise(function(resolve, reject){                                    
-                xhr.open('GET','http://localhost:3000/comments')                
+        var myPromise1 = new Promise(function(resolve, reject){                                                   
+                xhr.open('GET','http://localhost:3000/comments/')                
                 xhr.setRequestHeader('Content-type', 'application/json')                
                 xhr.send();        
-                xhr.onload = function (){                    
+                xhr.onload = function (){                                        
                     if(xhr.status === 200){
                         resolve({
                             data: xhr.responseText,
                             success: '成功拿到資料'
                         })                                                       
-                    }else{
+                    }else{                        
                         reject('連線錯誤')
                     }
                 }                        
