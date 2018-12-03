@@ -10,48 +10,68 @@ export default class Menu{
 
         // showMenu
         for (let i=0; i< this.menuBtn.length; i++){
-            this.menuBtn[i].addEventListener('click', this.showMenu)
+            this.menuBtn[i].addEventListener('click', function(e){                                
+                    // .bind(this)(e) 把點擊的物件(this)傳進showMenu裡，並帶事件參數e進去
+                if(!_this.isOpen){
+                    _this.showMenu.bind(this)(e)
+                    _this.ifOneMenuOpen();      
+                }                                     
+            })                  
         }        
 
         // closeMenu
         this.body.addEventListener('click', function(){
             if(!document.querySelector('.menubox.active')){
                 return;
-            }
-            _this.ifOneMenuOpen();            
+            }                                 
             _this.closeMenu();                        
         });
 
-        // 
+        // changeMenuContent
         for (let i=0; i< this.menubox.length; i++){
-            this.menubox[i].addEventListener('click', function(e){          
-                _this.ifOneMenuOpen();      
+            this.menubox[i].addEventListener('click', function(e){ 
+                e.stopPropagation()                                                          
                 let txt = e.target.textContent;                
                 let parent = this.parentNode;
                 let sib = _this.siblingElem(this);
-                let menuTxtItem = sib.filter((item) => {
+                let isBtn = parent.classList.value.split(' ').some(item => item === 'btn')
+
+                let menuTxtItem = sib.filter((item) => {                    
                     let classArr = Array.prototype.slice.call(item.classList);
                     let menuTxt = classArr.some((item) => {
                         return item === 'js-menuTxt'
                     })
                     return menuTxt;
-                })
-                menuTxtItem[0].textContent = txt;                
-                _this.closeMenu();                  
+                })                
+
+                // change btn color
+                if(isBtn){
+                    parent.classList.remove(menuTxtItem[0].textContent.toLowerCase())
+                    parent.classList.add(txt.toLowerCase())
+                }
+                
+                // change text
+                if(menuTxtItem.length) {       
+                    if(isBtn){
+                        menuTxtItem[0].textContent = txt.toUpperCase();                
+                    }else{
+                        menuTxtItem[0].textContent = txt;                
+                    }                                 
+                    _this.closeMenu();                  
+                }
             })
         }
 
         
     }
 
-    showMenu(e){        
-        e.stopPropagation()     
-
+    showMenu(e){                
+        e.stopPropagation()             
         let btnChildren = this.children;     
-        console.log(e.target)   
+        // console.log(e.target)   
+        console.log(this)
         for (let i=0, max=btnChildren.length; i<max; i++){                           
-            if(btnChildren[i].nodeName === 'UL' && !( e.target.nodeName === 'LI' ) ) {                                
-                console.log('click1')                
+            if(btnChildren[i].nodeName === 'UL' && !( e.target.nodeName === 'LI' ) ) {                                                
                 let arr = [];
                 let likeArr = btnChildren[i].classList;
                 for (let x=0; x<likeArr.length; x++){
@@ -65,32 +85,22 @@ export default class Menu{
         }                        
     }
 
-    closeMenu(e){                               
-        if(this.isOpen){                 
+    closeMenu(){                               
+        if(this.isOpen){                             
             console.log('click2')       
             let openMenu = document.querySelector('.menubox.active');
             openMenu.classList.remove('active');
-        }                    
-        this.isOpen = false;
+            this.isOpen = false;
+        }                            
     }       
 
-    ifOneMenuOpen(){
-        let menuboxAll = document.querySelectorAll('.menubox');
-        let arr = Array.from(menuboxAll);
-        this.isOpen = arr.some((item) => {
-            let classArr = Array.from(item.classList);
-            let hasActive = classArr.some((item) =>{ 
-                return item === 'active'
-            })
-            return hasActive
-        })        
-    }
+    ifOneMenuOpen(){        
+        if(!document.querySelectorAll('.menubox.active').length) return
+        this.isOpen = true        
+    }    
 
-    replaceWord(){                
-        if(this.isOpen){            
-            
-        }  
-    }
+    // *******  Utilities *********** //
+
 
     //find siblingElem
     siblingElem(elem) {

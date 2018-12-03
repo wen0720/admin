@@ -137,7 +137,13 @@ var Menu = function () {
 
         // showMenu
         for (var i = 0; i < this.menuBtn.length; i++) {
-            this.menuBtn[i].addEventListener('click', this.showMenu);
+            this.menuBtn[i].addEventListener('click', function (e) {
+                // .bind(this)(e) 把點擊的物件(this)傳進showMenu裡，並帶事件參數e進去
+                if (!_this.isOpen) {
+                    _this.showMenu.bind(this)(e);
+                    _this.ifOneMenuOpen();
+                }
+            });
         }
 
         // closeMenu
@@ -145,17 +151,20 @@ var Menu = function () {
             if (!document.querySelector('.menubox.active')) {
                 return;
             }
-            _this.ifOneMenuOpen();
             _this.closeMenu();
         });
 
-        // 
+        // changeMenuContent
         for (var _i = 0; _i < this.menubox.length; _i++) {
             this.menubox[_i].addEventListener('click', function (e) {
-                _this.ifOneMenuOpen();
+                e.stopPropagation();
                 var txt = e.target.textContent;
                 var parent = this.parentNode;
                 var sib = _this.siblingElem(this);
+                var isBtn = parent.classList.value.split(' ').some(function (item) {
+                    return item === 'btn';
+                });
+
                 var menuTxtItem = sib.filter(function (item) {
                     var classArr = Array.prototype.slice.call(item.classList);
                     var menuTxt = classArr.some(function (item) {
@@ -163,8 +172,22 @@ var Menu = function () {
                     });
                     return menuTxt;
                 });
-                menuTxtItem[0].textContent = txt;
-                _this.closeMenu();
+
+                // change btn color
+                if (isBtn) {
+                    parent.classList.remove(menuTxtItem[0].textContent.toLowerCase());
+                    parent.classList.add(txt.toLowerCase());
+                }
+
+                // change text
+                if (menuTxtItem.length) {
+                    if (isBtn) {
+                        menuTxtItem[0].textContent = txt.toUpperCase();
+                    } else {
+                        menuTxtItem[0].textContent = txt;
+                    }
+                    _this.closeMenu();
+                }
             });
         }
     }
@@ -173,12 +196,11 @@ var Menu = function () {
         key: 'showMenu',
         value: function showMenu(e) {
             e.stopPropagation();
-
             var btnChildren = this.children;
-            console.log(e.target);
+            // console.log(e.target)   
+            console.log(this);
             for (var i = 0, max = btnChildren.length; i < max; i++) {
                 if (btnChildren[i].nodeName === 'UL' && !(e.target.nodeName === 'LI')) {
-                    console.log('click1');
                     var arr = [];
                     var likeArr = btnChildren[i].classList;
                     for (var x = 0; x < likeArr.length; x++) {
@@ -197,32 +219,23 @@ var Menu = function () {
         }
     }, {
         key: 'closeMenu',
-        value: function closeMenu(e) {
+        value: function closeMenu() {
             if (this.isOpen) {
                 console.log('click2');
                 var openMenu = document.querySelector('.menubox.active');
                 openMenu.classList.remove('active');
+                this.isOpen = false;
             }
-            this.isOpen = false;
         }
     }, {
         key: 'ifOneMenuOpen',
         value: function ifOneMenuOpen() {
-            var menuboxAll = document.querySelectorAll('.menubox');
-            var arr = Array.from(menuboxAll);
-            this.isOpen = arr.some(function (item) {
-                var classArr = Array.from(item.classList);
-                var hasActive = classArr.some(function (item) {
-                    return item === 'active';
-                });
-                return hasActive;
-            });
+            if (!document.querySelectorAll('.menubox.active').length) return;
+            this.isOpen = true;
         }
-    }, {
-        key: 'replaceWord',
-        value: function replaceWord() {
-            if (this.isOpen) {}
-        }
+
+        // *******  Utilities *********** //
+
 
         //find siblingElem
 

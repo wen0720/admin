@@ -39,6 +39,7 @@
 .fliter{
     position: relative;
     .active{
+        display: inline-block;
         &.light{
             color:#9b9b9b;
             font-size: 16px;
@@ -78,11 +79,11 @@
 .view{    
     .overView{        
         $colorList1:(
-            'color-1': #7ED321,
-            'color-2': #4A90E2,
-            'color-3': #D0021B
+            'color-rev': #7ED321,
+            'color-cost': #4A90E2,
+            'color-income': #D0021B
         );
-        @each $color in color-1, color-2, color-3{
+        @each $color in color-rev, color-cost, color-income{
             p.#{$color}{
                 color: map-get($colorList1, $color )
             }
