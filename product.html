@@ -31,7 +31,7 @@
                     </div>
                 </div>                
                 <div class="fliter">
-                    <div class="active bg-dark borderR-5px">ADD NEW PRODUCT +</div>
+                    <div id="js-addPdt" class="active bg-dark borderR-5px">ADD NEW PRODUCT +</div>
                     <ul class="menubox">
                         <li><span></span>Order ID</li>
                         <li>Customer</li>
@@ -145,7 +145,138 @@
                 </ul>
             </div>
         </div>
-    </div> 
+        <div class="lightbox__bg" id="js-lightboxBg">
+            <div class="lightbox" id="js-lightbox">
+                <div class="lightbox__title">
+                    <p>ADD NEW PRODUCT</p>
+                    <div class="lightbox__close"><i id="js-lightboxClose" class="fas fa-times"></i></div> 
+                </div>
+                <div class="lightbox__content">
+                        <div class="file">
+                            <div class="file__add">
+                                <div class="file__hint" id="js-dragDectect">
+                                    <form action="#">
+                                        <label for="js-file"></label>
+                                        <input type="file" id="js-file" name="file" accept=".jpg, .jpeg, .png" multiple>
+                                    </form>                                    
+                                    <i class="fas fa-upload"></i>
+                                    <p>Drag an image or click here to upload...</p>
+                                </div>                    
+                            </div>
+                            <div class="file__uploaded">
+                                <ul id="js-uploaded">
+                                    <!-- <li><img src="https://fakeimg.pl/250x250/?text=World&font=lobster"></li> -->                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <div class="info__item">
+                                <div class="info__title">
+                                    Product Discription
+                                </div>
+                                <div class="info__txt">
+                                    <input type="text" placeholder="Title">
+                                </div>
+                                <div class="info__txt">
+                                    <textarea name="" id="" cols="30" rows="10" placeholder="Discription"></textarea>
+                                </div>
+                            </div>    
+                            <div class="info__item">
+                                <div class="info__title">
+                                    Price
+                                </div>
+                                <div class="info__list">
+                                    <div class="info__input">
+                                        <div class="info__label">Original</div>
+                                        <div class="info__txt">                                    
+                                            <input type="num">
+                                        </div>
+                                    </div>                                
+                                    <div class="info__input">
+                                        <div class="info__label">Discount</div>
+                                        <div class="info__txt">                                    
+                                            <input type="num">
+                                        </div>
+                                    </div>                                
+                                </div>                                
+                            </div>                                         
+                            <div class="info__item">
+                                <div class="info__title">
+                                    Specification
+                                </div>
+                                <div id="js-specList">
+                                    <div class="info__list js-spec">
+                                        <div class="info__input">
+                                            <div class="info__label">Size</div>
+                                            <div class="info__txt">                                     
+                                                <select name="" id="">
+                                                    <option value="" selected disabled>size</option>
+                                                    <option value="S" >S</option>
+                                                    <option value="M" >M</option>
+                                                    <option value="L" >L</option>
+                                                    <option value="XL" >XL</option>
+                                                    <option value="XXL" >XXL</option>
+                                                </select>
+                                            </div>                                    
+                                        </div>                                
+                                        <div class="info__input">
+                                            <div class="info__label">Color</div>
+                                            <div class="info__txt">                                    
+                                                <input type="text" placeholder="color">
+                                            </div>
+                                        </div>    
+                                        <div class="info__input">
+                                            <div class="info__label">Inventory</div>
+                                            <div class="info__txt">                                    
+                                                <input type="num" placeholder="inventory">
+                                            </div>
+                                        </div>                  
+                                    </div>              
+                                </div>
+                            </div>                                                                  
+                            <div class="info__btn" id="js-addSpec">
+                                <div class="btn full main">ADD NEW SPECIFICATION +</div>                              
+                            </div>                 
+                            <div class="info__save">
+                                <div class="btn txtNoRecomnd">SAVE DRAFT</div>
+                                <div class="btn main">PUBLISH</div>
+                            </div>                                      
+                        </div>
+                </div>                
+            </div>
+        </div>        
+    </div>     
+
+    <template id="js-template">
+        <div class="info__list js-spec">
+            <div class="info__close"><i class="js-specClose fas fa-times"></i></div> 
+            <div class="info__input">
+                <div class="info__label">Size</div>
+                <div class="info__txt">                                     
+                    <select name="" id="">
+                        <option value="" selected disabled>size</option>
+                        <option value="S" >S</option>
+                        <option value="M" >M</option>
+                        <option value="L" >L</option>
+                        <option value="XL" >XL</option>
+                        <option value="XXL" >XXL</option>
+                    </select>
+                </div>                                    
+            </div>                                
+            <div class="info__input">
+                <div class="info__label">Color</div>
+                <div class="info__txt">                                    
+                    <input type="text" placeholder="color">
+                </div>
+            </div>    
+            <div class="info__input">
+                <div class="info__label">Inventory</div>
+                <div class="info__txt">                                    
+                    <input type="num"placeholder="inventory">
+                </div>
+            </div>                  
+        </div>
+    </template>
     <script src="dist/bundle.js"></script>
 </body>
 </html>

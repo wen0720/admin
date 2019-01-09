@@ -1,119 +1,473 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
 
-var _menu = require('./menu.js');
+var _chart = require('./chart');
+
+var _chart2 = _interopRequireDefault(_chart);
+
+var _menu = require('./menu');
 
 var _menu2 = _interopRequireDefault(_menu);
 
+var _filter = require('./filter');
+
+var _filter2 = _interopRequireDefault(_filter);
+
+var _file = require('./file');
+
+var _file2 = _interopRequireDefault(_file);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var chart = require('./chart.js');
+// const chart = require('./chart.js');
+new _menu2.default();
+new _filter2.default();
+new _chart2.default();
+new _file2.default();
 
-
-var menuFuc = new _menu2.default();
-chart.drawChart();
-
-},{"./chart.js":2,"./menu.js":3}],2:[function(require,module,exports){
+},{"./chart":2,"./file":4,"./filter":5,"./menu":6}],2:[function(require,module,exports){
 'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var chartJs = require('chart.js');
 
-function drawChart() {
-    if (!document.getElementById('lineChart')) {
-        return;
+var chartStyle = function () {
+    function chartStyle() {
+        _classCallCheck(this, chartStyle);
+
+        this.drawChart('2019-01-12');
+
+        this.revenueArr = [];
+        this.costArr = [];
+        this.incomeArr = [];
+        this.totalRevenue;
+        this.totalCost;
+        this.totalIncome;
     }
-    var ctx = document.getElementById('lineChart').getContext('2d');
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'line',
 
-        // The data for our dataset
-        data: {
-            xLabels: ["6 JUN", "7 JUN", "8 JUN", "9 JUN", "10 JUN", "11 JUN", "12 JUN", "13 JUN"],
-            datasets: [{
-                label: "My First dataset",
-                data: [1000, 4000, 5000, 2000, 2030, 3000, 7800, 4000],
-                fill: false,
-                backgroundColor: 'rgba(208,2,27,1)',
-                borderColor: 'rgba(208,2,27,1)'
-            }, {
-                label: "My Second dataset",
-                data: [8000, 3000, 5000, 4000, 1030, 7000, 7800, 2000],
-                fill: false,
-                backgroundColor: 'rgba(74,144,226,1)',
-                borderColor: 'rgba(74,144,226,1)'
-            }, {
-                label: "My thrid dataset",
-                data: [5000, 3300, 6000, 2000, 4030, 6700, 4200, 1000],
-                fill: false,
-                backgroundColor: 'rgba(126,211,33,1)',
-                borderColor: 'rgba(126,211,33,1)'
-            }]
-        },
-
-        // Configuration options go here
-        options: {
-            legend: {
-                display: false
-            },
-            elements: {
-                line: {
-                    tension: 0,
-                    borderWidth: 0
-                }
-            },
-            // layout: {
-            //     padding:{
-            //         left:60,
-            //     }    
-            // },
-            scales: {
-                xAxes: [{
-                    // type: 'category',
-                    // labels: ["6 JUN", "7 JUN", "8 JUN", "9 JUN", "10 JUN", "11 JUN", "15 JUN", "18 JUN"],
-                    ticks: {
-                        display: true,
-                        fontSize: 16
-                    },
-                    gridLines: {
-                        display: false
-
-                    }
-                }],
-                yAxes: [{
-                    // type: 'category',
-                    // labels: ['January', 'February', 'March', 'April', 'May', 'June'],                            
-                    gridLines: {
-                        drawTicks: false
-                    },
-                    ticks: {
-                        fontSize: 16,
-                        // maxTicksLimit: 5,
-                        max: 8000,
-                        min: 0,
-                        stepSize: 2000,
-                        callback: function callback(value, index, values) {
-                            var newValue = void 0;
-                            if (value > 1000) {
-                                var valueArrStr = ('' + value).split('');
-                                valueArrStr.splice(1, 0, ',');
-                                newValue = valueArrStr.join('');
-                                // console.log(valueArrStr,newValue)
-                            }
-                            return newValue;
-                        }
-                    }
-                }]
-            }
+    _createClass(chartStyle, [{
+        key: 'getTime',
+        value: function getTime(date) {
+            var day = (0, _moment2.default)(date).format('D');
+            var month = (0, _moment2.default)(date).format('MMM');
+            return {
+                day: day,
+                month: month
+            };
         }
-    });
-}
+    }, {
+        key: 'getdata',
+        value: function getdata(url) {
+            return fetch(url);
+        }
+    }, {
+        key: 'drawChart',
+        value: function drawChart(time) {
+            var _this = this;
 
-module.exports = {
-    drawChart: drawChart
+            if (!document.getElementById('lineChart')) {
+                return;
+            }
+
+            var ctx = document.getElementById('lineChart').getContext('2d');
+
+            this.getdata('http://localhost:3000/Daily').then(function (res) {
+                return res.json();
+            }).then(function (res) {
+                _this.revenueArr = [];
+                _this.costArr = [];
+                _this.incomeArr = [];
+                _this.dateArr = [];
+                _this.nowDate = _this.getTime(time);
+
+                // 找目前日期在資料中的位置，無法在陣列中比對物件，先把day map出一個新陣列，再用indexOf去查位置
+                var nowDateIndex = res.map(function (item, idx) {
+                    return item.day;
+                }).indexOf(Number(_this.nowDate.day));
+
+                var periodRes = res.slice(nowDateIndex - 3, nowDateIndex + 3 + 1); // slice 不會包含end的物件，但我要抓前後3個，故最後在+1
+
+                periodRes.forEach(function (item) {
+                    _this.costArr.push(item.cost);
+                    _this.revenueArr.push(item.revenue);
+                    _this.incomeArr.push(item.netIncome);
+                    _this.dateArr.push(item.day + ' ' + item.month);
+                });
+
+                _this.totalRevenue = _this.revenueArr.reduce(function (total, item) {
+                    return total += item;
+                });
+                _this.totalCost = _this.costArr.reduce(function (total, item) {
+                    return total += item;
+                });
+                _this.totalIncome = _this.incomeArr.reduce(function (total, item) {
+                    return total += item;
+                });
+
+                var chart = _this.newChart(ctx);
+                document.getElementById('js-revenueNum').textContent = _this.totalRevenue;
+                document.getElementById('js-costNum').textContent = _this.totalCost;
+                document.getElementById('js-incomeNum').textContent = _this.totalIncome;
+            });
+        }
+    }, {
+        key: 'newChart',
+        value: function newChart(ctx) {
+            return new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'line',
+
+                // The data for our dataset
+                data: {
+                    xLabels: this.dateArr,
+                    datasets: [{
+                        label: "revenue",
+                        data: this.revenueArr,
+                        fill: false,
+                        backgroundColor: 'rgba(126,211,33,1)',
+                        borderColor: 'rgba(126,211,33,1)'
+                    }, {
+                        label: "cost",
+                        data: this.costArr,
+                        fill: false,
+                        backgroundColor: 'rgba(74,144,226,1)',
+                        borderColor: 'rgba(74,144,226,1)'
+                    }, {
+                        label: "income",
+                        data: this.incomeArr,
+                        fill: false,
+                        backgroundColor: 'rgba(208,2,27,1)',
+                        borderColor: 'rgba(208,2,27,1)'
+                    }]
+                },
+
+                // Configuration options go here
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    elements: {
+                        line: {
+                            tension: 0,
+                            borderWidth: 0
+                        }
+                    },
+                    // layout: {
+                    //     padding:{
+                    //         left:60,
+                    //     }    
+                    // },
+                    scales: {
+                        xAxes: [{
+                            // type: 'category',
+                            // labels: ["6 JUN", "7 JUN", "8 JUN", "9 JUN", "10 JUN", "11 JUN", "15 JUN", "18 JUN"],
+                            ticks: {
+                                display: true,
+                                fontSize: 16
+                            },
+                            gridLines: {
+                                display: false
+
+                            }
+                        }],
+                        yAxes: [{
+                            // type: 'category',
+                            // labels: ['January', 'February', 'March', 'April', 'May', 'June'],                            
+                            gridLines: {
+                                drawTicks: false
+                            },
+                            ticks: {
+                                fontSize: 16,
+                                // maxTicksLimit: 5,
+                                max: 8000,
+                                min: 0,
+                                stepSize: 2000,
+                                callback: function callback(value, index, values) {
+                                    var newValue = void 0;
+                                    if (value > 1000) {
+                                        var valueArrStr = ('' + value).split('');
+                                        valueArrStr.splice(1, 0, ',');
+                                        newValue = valueArrStr.join('');
+                                        // console.log(valueArrStr,newValue)
+                                    }
+                                    return newValue;
+                                }
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+    }]);
+
+    return chartStyle;
+}();
+
+exports.default = chartStyle;
+
+},{"chart.js":8,"moment":66}],3:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var orderTableDefaultLayout = {
+    customer: '162px',
+    product: '182px',
+    total: '83px',
+    addTime: '115px',
+    checkOutTime: '115px',
+    address: '163px ',
+    status: '144px'
 };
 
-},{"chart.js":4}],3:[function(require,module,exports){
+exports.orderTableDefaultLayout = orderTableDefaultLayout;
+
+},{}],4:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _utility = require('./utility');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var file = function () {
+    function file() {
+        var _this = this;
+
+        _classCallCheck(this, file);
+
+        this.dragArea = document.getElementById('js-dragDectect');
+        this.$file = document.getElementById('js-file');
+        this.$addSpecBtn = document.getElementById('js-addSpec');
+        this.$lightbox = document.getElementById('js-lightbox');
+        this.$lightboxBg = document.getElementById('js-lightboxBg');
+        this.$lightboxClose = document.getElementById('js-lightboxClose');
+        this.$addPdtBtn = document.getElementById('js-addPdt');
+        this.$specList = document.getElementById('js-specList');
+
+        this.$file.addEventListener('change', function (e) {
+
+            _this.addImgOnWeb(_this.$file.files);
+
+            // let fileNum = this.files.length            
+            // let num = 1;
+            // if(this.files){                           
+            //     for ( ;num <= fileNum; num++ ){
+            //     let reader = new FileReader();                                                  
+            //     reader.onload = function (e){                                         
+            //         _this.createUploadedImg(e.target.result)
+            //     }                   
+            //     reader.readAsDataURL(this.files[num-1])  // 將檔案轉base 64編碼
+            //     }                         
+            // }            
+        });
+
+        this.dragArea.addEventListener('dragover', function (e) {
+            // 因為圖片拉近瀏覽器時，預設會打開新視窗，所以移除預設事件
+            e.preventDefault();
+        });
+
+        this.dragArea.addEventListener('drop', function (e) {
+            // 因為圖片拉近瀏覽器時，預設會打開新視窗，所以移除預設事件
+            e.preventDefault();
+
+            // 把檔案帶入用FileReader轉base64，在執行createUploadedImg()
+            _this.addImgOnWeb(e.dataTransfer.files);
+        });
+
+        this.$addSpecBtn.addEventListener('click', function (e) {
+            var content = document.getElementById('js-template').content;
+
+            var clone = document.importNode(content, true); // 要複製一份（原因還不確定
+            document.getElementById('js-specList').appendChild(clone);
+        });
+
+        this.$lightboxClose.addEventListener('click', function (e) {
+            _this.$lightbox.classList.remove('active');
+            _this.$lightboxBg.classList.remove('active');
+        });
+
+        this.$lightboxBg.addEventListener('click', function (e) {
+            if (e.target.id === "js-lightboxBg") {
+                _this.$lightbox.classList.remove('active');
+                _this.$lightboxBg.classList.remove('active');
+            }
+        });
+
+        this.$addPdtBtn.addEventListener('click', function (e) {
+            _this.$lightbox.classList.add('active');
+            _this.$lightboxBg.classList.add('active');
+        });
+
+        this.$specList.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (Array.prototype.slice.call(e.target.classList).some(function (item) {
+                return item === 'js-specClose';
+            })) {
+                var parentSpec = (0, _utility.parentElem)(e.target, 'js-spec').pop();
+                parentSpec.innerHTML = '';
+            }
+        });
+    }
+
+    _createClass(file, [{
+        key: 'createUploadedImg',
+        value: function createUploadedImg(src) {
+            var li = document.createElement('li');
+            var img = document.createElement('img');
+            img.src = src;
+            li.appendChild(img);
+            document.getElementById('js-uploaded').appendChild(li);
+        }
+    }, {
+        key: 'addImgOnWeb',
+        value: function addImgOnWeb(files) {
+            var _this2 = this;
+
+            var fileNum = files.length;
+            var num = 1;
+            if (files) {
+                for (; num <= fileNum; num++) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        _this2.createUploadedImg(e.target.result);
+                    };
+                    reader.readAsDataURL(files[num - 1]); // 將檔案轉base 64編碼
+                }
+            }
+        }
+    }]);
+
+    return file;
+}();
+
+exports.default = file;
+
+},{"./utility":7}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _config = require('./config');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var filter = function () {
+    function filter() {
+        var _this = this;
+
+        _classCallCheck(this, filter);
+
+        this.$checkboxList = document.querySelectorAll('.check input[type="checkbox"]');
+
+        // checkbox篩選表格顯示
+        for (var i = 0; i < this.$checkboxList.length; i++) {
+            this.$checkboxList[i].addEventListener('click', function (e) {
+                e.stopPropagation();
+                var _id = e.target.id;
+                var checked = e.target.checked;
+                var removeObjClass = '.js-' + _id;
+
+                var $thisTh = document.querySelector('th' + removeObjClass); // chekbox點擊時的對應表格標頭
+                var $othrThArr = _this.siblingElem($thisTh); // 其餘的表格標頭                
+                var $nowCheckedArr = _this.nowChecked(true); // 當下有checked的項目  
+                var nowCheckedNum = $nowCheckedArr.length; // 當下有checked項目的數量           
+                var $nowNoCheckedArr = _this.nowChecked(false); // 當下沒checked的項目                              
+                var nowEmptyWidth = 0; // 計算被隱藏項目的寬度，每次點擊都先歸0                
+
+                if ($nowNoCheckedArr !== []) {
+                    $nowNoCheckedArr.forEach(function (item) {
+                        var mapItem = item.id;
+                        nowEmptyWidth += parseInt(_config.orderTableDefaultLayout[mapItem]);
+                    });
+                }
+
+                // 所有class 與 removeObjClass 相符的，都要隱藏或出現
+                if (!checked) {
+                    for (var _i = 0; _i < document.querySelectorAll(removeObjClass).length; _i++) {
+                        document.querySelectorAll(removeObjClass)[_i].style.display = 'none';
+                    }
+                } else {
+                    for (var _i2 = 0; _i2 < document.querySelectorAll(removeObjClass).length; _i2++) {
+                        document.querySelectorAll(removeObjClass)[_i2].style.display = 'table-cell';
+                    }
+                }
+
+                // 計算剩餘表格項目的寬度(預設寬度 + 被隱藏項目的總寬度/目前剩餘項目)
+                $othrThArr.forEach(function (item) {
+                    var mapItem = item.classList.value.split('-').pop();
+                    item.style.width = parseInt(_config.orderTableDefaultLayout[mapItem]) + Math.floor(nowEmptyWidth / nowCheckedNum) + 'px';
+                });
+            });
+        }
+    }
+
+    _createClass(filter, [{
+        key: 'nowChecked',
+        value: function nowChecked() {
+            var bool = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+            return Array.prototype.slice.call(this.$checkboxList).filter(function (item) {
+                return bool === true ? item.checked === true : item.checked === false;
+            });
+        }
+
+        //find siblingElem
+
+    }, {
+        key: 'siblingElem',
+        value: function siblingElem(elem) {
+            var _nodes = [],
+
+            //把elem 另外先存在_elem 
+            _elem = elem;
+            //elem的前一個node存在的話 
+            while (elem = elem.previousSibling) {
+                if (elem.nodeType === 1) {
+                    _nodes.push(elem);
+                }
+            }
+            //把elem帶回來
+            elem = _elem;
+            //elem的後一個node存在的話
+            while (elem = elem.nextSibling) {
+                if (elem.nodeType === 1) {
+                    _nodes.push(elem);
+                }
+            }
+            return _nodes;
+        }
+    }]);
+
+    return filter;
+}();
+
+exports.default = filter;
+
+},{"./config":3}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -140,13 +494,14 @@ var Menu = function () {
             this.menuBtn[i].addEventListener('click', function (e) {
                 // .bind(this)(e) 把點擊的物件(this)傳進showMenu裡，並帶事件參數e進去
                 if (!_this.isOpen) {
+                    // 如果沒有任何menu開啟
                     _this.showMenu.bind(this)(e);
-                    _this.ifOneMenuOpen();
+                    _this.ifOneMenuOpen(); // 有任一menu開啟，this.open = true      
                 }
             });
         }
 
-        // closeMenu
+        // body 綁定 closeMenu事件
         this.body.addEventListener('click', function () {
             if (!document.querySelector('.menubox.active')) {
                 return;
@@ -166,6 +521,7 @@ var Menu = function () {
                 });
 
                 var menuTxtItem = sib.filter(function (item) {
+                    //抓js-menuTxt         
                     var classArr = Array.prototype.slice.call(item.classList);
                     var menuTxt = classArr.some(function (item) {
                         return item === 'js-menuTxt';
@@ -173,10 +529,38 @@ var Menu = function () {
                     return menuTxt;
                 });
 
-                // change btn color
+                // change btn & tr status
                 if (isBtn) {
+                    var parentTr = _this.parentElem(this, 'js-tr').pop();
+                    var parentClassArr = parentTr.classList.value.split(' ');
+                    var oldStatusIsUnpaid = parentClassArr.some(function (item) {
+                        return item === 'unpaid';
+                    });
+                    var oldStatusIsDone = parentClassArr.some(function (item) {
+                        return item === 'done';
+                    });
+
                     parent.classList.remove(menuTxtItem[0].textContent.toLowerCase());
                     parent.classList.add(txt.toLowerCase());
+
+                    if (txt.toLowerCase() === 'done') {
+                        if (oldStatusIsUnpaid) {
+                            parentTr.classList.remove('unpaid');
+                        }
+                        parentTr.classList.add('done');
+                    }
+
+                    if (txt.toLowerCase() === 'unpaid') {
+                        if (oldStatusIsDone) {
+                            parentTr.classList.remove('done');
+                        }
+                        parentTr.classList.add('unpaid');
+                    }
+
+                    if (txt.toLowerCase() === 'shipping' || txt.toLowerCase() === 'paid') {
+                        parentTr.classList.remove('done');
+                        parentTr.classList.remove('unpaid');
+                    }
                 }
 
                 // change text
@@ -197,8 +581,7 @@ var Menu = function () {
         value: function showMenu(e) {
             e.stopPropagation();
             var btnChildren = this.children;
-            // console.log(e.target)   
-            console.log(this);
+            // console.log(e.target)           
             for (var i = 0, max = btnChildren.length; i < max; i++) {
                 if (btnChildren[i].nodeName === 'UL' && !(e.target.nodeName === 'LI')) {
                     var arr = [];
@@ -262,6 +645,31 @@ var Menu = function () {
             }
             return _nodes;
         }
+
+        // find parentNode
+        /**** 
+         * {
+         *  elem: 當下的元素
+         *  parentClass: 想要找到的父層class
+         * }
+        */
+
+    }, {
+        key: 'parentElem',
+        value: function parentElem(elem, parentClass) {
+            var _nodes = [],
+                isParentClass = void 0;
+
+            do {
+                elem = elem.parentNode;
+                _nodes.push(elem);
+                isParentClass = elem.classList.value.split(' ').some(function (item) {
+                    return item === parentClass;
+                });
+            } while (!isParentClass);
+
+            return _nodes;
+        }
     }]);
 
     return Menu;
@@ -269,7 +677,30 @@ var Menu = function () {
 
 exports.default = Menu;
 
-},{}],4:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+function parentElem(elem, parentClass) {
+    var _nodes = [],
+        isParentClass = void 0;
+
+    do {
+        elem = elem.parentNode;
+        _nodes.push(elem);
+        isParentClass = elem.classList.value.split(' ').some(function (item) {
+            return item === parentClass;
+        });
+    } while (!isParentClass);
+
+    return _nodes;
+}
+
+exports.parentElem = parentElem;
+
+},{}],8:[function(require,module,exports){
 /**
  * @namespace Chart
  */
@@ -394,7 +825,7 @@ Chart.canvasHelpers = Chart.helpers.canvas;
  */
 Chart.layoutService = Chart.layouts;
 
-},{"./charts/Chart.Bar":5,"./charts/Chart.Bubble":6,"./charts/Chart.Doughnut":7,"./charts/Chart.Line":8,"./charts/Chart.PolarArea":9,"./charts/Chart.Radar":10,"./charts/Chart.Scatter":11,"./controllers/controller.bar":12,"./controllers/controller.bubble":13,"./controllers/controller.doughnut":14,"./controllers/controller.line":15,"./controllers/controller.polarArea":16,"./controllers/controller.radar":17,"./controllers/controller.scatter":18,"./core/core":27,"./core/core.animation":19,"./core/core.animations":20,"./core/core.controller":21,"./core/core.datasetController":22,"./core/core.defaults":23,"./core/core.element":24,"./core/core.helpers":25,"./core/core.interaction":26,"./core/core.layouts":28,"./core/core.plugins":29,"./core/core.scale":30,"./core/core.scaleService":31,"./core/core.ticks":32,"./core/core.tooltip":33,"./elements/index":38,"./helpers/index":43,"./platforms/platform":46,"./plugins":47,"./scales/scale.category":51,"./scales/scale.linear":52,"./scales/scale.linearbase":53,"./scales/scale.logarithmic":54,"./scales/scale.radialLinear":55,"./scales/scale.time":56}],5:[function(require,module,exports){
+},{"./charts/Chart.Bar":9,"./charts/Chart.Bubble":10,"./charts/Chart.Doughnut":11,"./charts/Chart.Line":12,"./charts/Chart.PolarArea":13,"./charts/Chart.Radar":14,"./charts/Chart.Scatter":15,"./controllers/controller.bar":16,"./controllers/controller.bubble":17,"./controllers/controller.doughnut":18,"./controllers/controller.line":19,"./controllers/controller.polarArea":20,"./controllers/controller.radar":21,"./controllers/controller.scatter":22,"./core/core":31,"./core/core.animation":23,"./core/core.animations":24,"./core/core.controller":25,"./core/core.datasetController":26,"./core/core.defaults":27,"./core/core.element":28,"./core/core.helpers":29,"./core/core.interaction":30,"./core/core.layouts":32,"./core/core.plugins":33,"./core/core.scale":34,"./core/core.scaleService":35,"./core/core.ticks":36,"./core/core.tooltip":37,"./elements/index":42,"./helpers/index":47,"./platforms/platform":50,"./plugins":51,"./scales/scale.category":55,"./scales/scale.linear":56,"./scales/scale.linearbase":57,"./scales/scale.logarithmic":58,"./scales/scale.radialLinear":59,"./scales/scale.time":60}],9:[function(require,module,exports){
 'use strict';
 
 module.exports = function(Chart) {
@@ -407,7 +838,7 @@ module.exports = function(Chart) {
 
 };
 
-},{}],6:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 module.exports = function(Chart) {
@@ -419,7 +850,7 @@ module.exports = function(Chart) {
 
 };
 
-},{}],7:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 module.exports = function(Chart) {
@@ -432,7 +863,7 @@ module.exports = function(Chart) {
 
 };
 
-},{}],8:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 module.exports = function(Chart) {
@@ -445,7 +876,7 @@ module.exports = function(Chart) {
 
 };
 
-},{}],9:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 module.exports = function(Chart) {
@@ -458,7 +889,7 @@ module.exports = function(Chart) {
 
 };
 
-},{}],10:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 module.exports = function(Chart) {
@@ -471,7 +902,7 @@ module.exports = function(Chart) {
 
 };
 
-},{}],11:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 
 module.exports = function(Chart) {
@@ -481,7 +912,7 @@ module.exports = function(Chart) {
 	};
 };
 
-},{}],12:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 var defaults = require('../core/core.defaults');
@@ -964,7 +1395,7 @@ module.exports = function(Chart) {
 	});
 };
 
-},{"../core/core.defaults":23,"../elements/index":38,"../helpers/index":43}],13:[function(require,module,exports){
+},{"../core/core.defaults":27,"../elements/index":42,"../helpers/index":47}],17:[function(require,module,exports){
 'use strict';
 
 var defaults = require('../core/core.defaults');
@@ -1139,7 +1570,7 @@ module.exports = function(Chart) {
 	});
 };
 
-},{"../core/core.defaults":23,"../elements/index":38,"../helpers/index":43}],14:[function(require,module,exports){
+},{"../core/core.defaults":27,"../elements/index":42,"../helpers/index":47}],18:[function(require,module,exports){
 'use strict';
 
 var defaults = require('../core/core.defaults');
@@ -1442,7 +1873,7 @@ module.exports = function(Chart) {
 	});
 };
 
-},{"../core/core.defaults":23,"../elements/index":38,"../helpers/index":43}],15:[function(require,module,exports){
+},{"../core/core.defaults":27,"../elements/index":42,"../helpers/index":47}],19:[function(require,module,exports){
 'use strict';
 
 var defaults = require('../core/core.defaults');
@@ -1788,7 +2219,7 @@ module.exports = function(Chart) {
 	});
 };
 
-},{"../core/core.defaults":23,"../elements/index":38,"../helpers/index":43}],16:[function(require,module,exports){
+},{"../core/core.defaults":27,"../elements/index":42,"../helpers/index":47}],20:[function(require,module,exports){
 'use strict';
 
 var defaults = require('../core/core.defaults');
@@ -2045,7 +2476,7 @@ module.exports = function(Chart) {
 	});
 };
 
-},{"../core/core.defaults":23,"../elements/index":38,"../helpers/index":43}],17:[function(require,module,exports){
+},{"../core/core.defaults":27,"../elements/index":42,"../helpers/index":47}],21:[function(require,module,exports){
 'use strict';
 
 var defaults = require('../core/core.defaults');
@@ -2210,7 +2641,7 @@ module.exports = function(Chart) {
 	});
 };
 
-},{"../core/core.defaults":23,"../elements/index":38,"../helpers/index":43}],18:[function(require,module,exports){
+},{"../core/core.defaults":27,"../elements/index":42,"../helpers/index":47}],22:[function(require,module,exports){
 'use strict';
 
 var defaults = require('../core/core.defaults');
@@ -2254,7 +2685,7 @@ module.exports = function(Chart) {
 
 };
 
-},{"../core/core.defaults":23}],19:[function(require,module,exports){
+},{"../core/core.defaults":27}],23:[function(require,module,exports){
 'use strict';
 
 var Element = require('./core.element');
@@ -2299,7 +2730,7 @@ Object.defineProperty(exports.prototype, 'chartInstance', {
 	}
 });
 
-},{"./core.element":24}],20:[function(require,module,exports){
+},{"./core.element":28}],24:[function(require,module,exports){
 /* global window: false */
 'use strict';
 
@@ -2430,7 +2861,7 @@ module.exports = {
 	}
 };
 
-},{"../helpers/index":43,"./core.defaults":23}],21:[function(require,module,exports){
+},{"../helpers/index":47,"./core.defaults":27}],25:[function(require,module,exports){
 'use strict';
 
 var Animation = require('./core.animation');
@@ -3392,7 +3823,7 @@ module.exports = function(Chart) {
 	Chart.Controller = Chart;
 };
 
-},{"../core/core.scaleService":31,"../helpers/index":43,"../platforms/platform":46,"./core.animation":19,"./core.animations":20,"./core.defaults":23,"./core.interaction":26,"./core.layouts":28,"./core.plugins":29,"./core.tooltip":33}],22:[function(require,module,exports){
+},{"../core/core.scaleService":35,"../helpers/index":47,"../platforms/platform":50,"./core.animation":23,"./core.animations":24,"./core.defaults":27,"./core.interaction":30,"./core.layouts":32,"./core.plugins":33,"./core.tooltip":37}],26:[function(require,module,exports){
 'use strict';
 
 var helpers = require('../helpers/index');
@@ -3723,7 +4154,7 @@ module.exports = function(Chart) {
 	Chart.DatasetController.extend = helpers.inherits;
 };
 
-},{"../helpers/index":43}],23:[function(require,module,exports){
+},{"../helpers/index":47}],27:[function(require,module,exports){
 'use strict';
 
 var helpers = require('../helpers/index');
@@ -3737,7 +4168,7 @@ module.exports = {
 	}
 };
 
-},{"../helpers/index":43}],24:[function(require,module,exports){
+},{"../helpers/index":47}],28:[function(require,module,exports){
 'use strict';
 
 var color = require('chartjs-color');
@@ -3854,7 +4285,7 @@ Element.extend = helpers.inherits;
 
 module.exports = Element;
 
-},{"../helpers/index":43,"chartjs-color":58}],25:[function(require,module,exports){
+},{"../helpers/index":47,"chartjs-color":62}],29:[function(require,module,exports){
 /* global window: false */
 /* global document: false */
 'use strict';
@@ -4490,7 +4921,7 @@ module.exports = function() {
 	};
 };
 
-},{"../core/core.scaleService":31,"../helpers/index":43,"./core.defaults":23,"chartjs-color":58}],26:[function(require,module,exports){
+},{"../core/core.scaleService":35,"../helpers/index":47,"./core.defaults":27,"chartjs-color":62}],30:[function(require,module,exports){
 'use strict';
 
 var helpers = require('../helpers/index');
@@ -4822,7 +5253,7 @@ module.exports = {
 	}
 };
 
-},{"../helpers/index":43}],27:[function(require,module,exports){
+},{"../helpers/index":47}],31:[function(require,module,exports){
 'use strict';
 
 var defaults = require('./core.defaults');
@@ -4873,7 +5304,7 @@ module.exports = function() {
 	return Chart;
 };
 
-},{"./core.defaults":23}],28:[function(require,module,exports){
+},{"./core.defaults":27}],32:[function(require,module,exports){
 'use strict';
 
 var helpers = require('../helpers/index');
@@ -5294,7 +5725,7 @@ module.exports = {
 	}
 };
 
-},{"../helpers/index":43}],29:[function(require,module,exports){
+},{"../helpers/index":47}],33:[function(require,module,exports){
 'use strict';
 
 var defaults = require('./core.defaults');
@@ -5678,7 +6109,7 @@ module.exports = {
  * @param {Object} options - The plugin options.
  */
 
-},{"../helpers/index":43,"./core.defaults":23}],30:[function(require,module,exports){
+},{"../helpers/index":47,"./core.defaults":27}],34:[function(require,module,exports){
 'use strict';
 
 var defaults = require('./core.defaults');
@@ -6614,7 +7045,7 @@ module.exports = Element.extend({
 	}
 });
 
-},{"../helpers/index":43,"./core.defaults":23,"./core.element":24,"./core.ticks":32}],31:[function(require,module,exports){
+},{"../helpers/index":47,"./core.defaults":27,"./core.element":28,"./core.ticks":36}],35:[function(require,module,exports){
 'use strict';
 
 var defaults = require('./core.defaults');
@@ -6659,7 +7090,7 @@ module.exports = {
 	}
 };
 
-},{"../helpers/index":43,"./core.defaults":23,"./core.layouts":28}],32:[function(require,module,exports){
+},{"../helpers/index":47,"./core.defaults":27,"./core.layouts":32}],36:[function(require,module,exports){
 'use strict';
 
 var helpers = require('../helpers/index');
@@ -6737,7 +7168,7 @@ module.exports = {
 	}
 };
 
-},{"../helpers/index":43}],33:[function(require,module,exports){
+},{"../helpers/index":47}],37:[function(require,module,exports){
 'use strict';
 
 var defaults = require('./core.defaults');
@@ -7712,7 +8143,7 @@ var exports = module.exports = Element.extend({
 exports.positioners = positioners;
 
 
-},{"../helpers/index":43,"./core.defaults":23,"./core.element":24}],34:[function(require,module,exports){
+},{"../helpers/index":47,"./core.defaults":27,"./core.element":28}],38:[function(require,module,exports){
 'use strict';
 
 var defaults = require('../core/core.defaults');
@@ -7821,7 +8252,7 @@ module.exports = Element.extend({
 	}
 });
 
-},{"../core/core.defaults":23,"../core/core.element":24,"../helpers/index":43}],35:[function(require,module,exports){
+},{"../core/core.defaults":27,"../core/core.element":28,"../helpers/index":47}],39:[function(require,module,exports){
 'use strict';
 
 var defaults = require('../core/core.defaults');
@@ -7914,7 +8345,7 @@ module.exports = Element.extend({
 	}
 });
 
-},{"../core/core.defaults":23,"../core/core.element":24,"../helpers/index":43}],36:[function(require,module,exports){
+},{"../core/core.defaults":27,"../core/core.element":28,"../helpers/index":47}],40:[function(require,module,exports){
 'use strict';
 
 var defaults = require('../core/core.defaults');
@@ -8005,7 +8436,7 @@ module.exports = Element.extend({
 	}
 });
 
-},{"../core/core.defaults":23,"../core/core.element":24,"../helpers/index":43}],37:[function(require,module,exports){
+},{"../core/core.defaults":27,"../core/core.element":28,"../helpers/index":47}],41:[function(require,module,exports){
 'use strict';
 
 var defaults = require('../core/core.defaults');
@@ -8224,7 +8655,7 @@ module.exports = Element.extend({
 	}
 });
 
-},{"../core/core.defaults":23,"../core/core.element":24}],38:[function(require,module,exports){
+},{"../core/core.defaults":27,"../core/core.element":28}],42:[function(require,module,exports){
 'use strict';
 
 module.exports = {};
@@ -8233,7 +8664,7 @@ module.exports.Line = require('./element.line');
 module.exports.Point = require('./element.point');
 module.exports.Rectangle = require('./element.rectangle');
 
-},{"./element.arc":34,"./element.line":35,"./element.point":36,"./element.rectangle":37}],39:[function(require,module,exports){
+},{"./element.arc":38,"./element.line":39,"./element.point":40,"./element.rectangle":41}],43:[function(require,module,exports){
 'use strict';
 
 var helpers = require('./helpers.core');
@@ -8444,7 +8875,7 @@ helpers.drawRoundedRectangle = function(ctx) {
 	exports.roundedRect.apply(exports, arguments);
 };
 
-},{"./helpers.core":40}],40:[function(require,module,exports){
+},{"./helpers.core":44}],44:[function(require,module,exports){
 'use strict';
 
 /**
@@ -8785,7 +9216,7 @@ helpers.getValueOrDefault = helpers.valueOrDefault;
  */
 helpers.getValueAtIndexOrDefault = helpers.valueAtIndexOrDefault;
 
-},{}],41:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 'use strict';
 
 var helpers = require('./helpers.core');
@@ -9037,7 +9468,7 @@ module.exports = {
  */
 helpers.easingEffects = effects;
 
-},{"./helpers.core":40}],42:[function(require,module,exports){
+},{"./helpers.core":44}],46:[function(require,module,exports){
 'use strict';
 
 var helpers = require('./helpers.core');
@@ -9135,7 +9566,7 @@ module.exports = {
 	}
 };
 
-},{"./helpers.core":40}],43:[function(require,module,exports){
+},{"./helpers.core":44}],47:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./helpers.core');
@@ -9143,7 +9574,7 @@ module.exports.easing = require('./helpers.easing');
 module.exports.canvas = require('./helpers.canvas');
 module.exports.options = require('./helpers.options');
 
-},{"./helpers.canvas":39,"./helpers.core":40,"./helpers.easing":41,"./helpers.options":42}],44:[function(require,module,exports){
+},{"./helpers.canvas":43,"./helpers.core":44,"./helpers.easing":45,"./helpers.options":46}],48:[function(require,module,exports){
 /**
  * Platform fallback implementation (minimal).
  * @see https://github.com/chartjs/Chart.js/pull/4591#issuecomment-319575939
@@ -9160,7 +9591,7 @@ module.exports = {
 	}
 };
 
-},{}],45:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 /**
  * Chart.Platform implementation for targeting a web browser
  */
@@ -9619,7 +10050,7 @@ helpers.addEvent = addEventListener;
  */
 helpers.removeEvent = removeEventListener;
 
-},{"../helpers/index":43}],46:[function(require,module,exports){
+},{"../helpers/index":47}],50:[function(require,module,exports){
 'use strict';
 
 var helpers = require('../helpers/index');
@@ -9695,7 +10126,7 @@ module.exports = helpers.extend({
  * @prop {Number} y - The mouse y position, relative to the canvas (null for incompatible events)
  */
 
-},{"../helpers/index":43,"./platform.basic":44,"./platform.dom":45}],47:[function(require,module,exports){
+},{"../helpers/index":47,"./platform.basic":48,"./platform.dom":49}],51:[function(require,module,exports){
 'use strict';
 
 module.exports = {};
@@ -9703,7 +10134,7 @@ module.exports.filler = require('./plugin.filler');
 module.exports.legend = require('./plugin.legend');
 module.exports.title = require('./plugin.title');
 
-},{"./plugin.filler":48,"./plugin.legend":49,"./plugin.title":50}],48:[function(require,module,exports){
+},{"./plugin.filler":52,"./plugin.legend":53,"./plugin.title":54}],52:[function(require,module,exports){
 /**
  * Plugin based on discussion from the following Chart.js issues:
  * @see https://github.com/chartjs/Chart.js/issues/2380#issuecomment-279961569
@@ -10023,7 +10454,7 @@ module.exports = {
 	}
 };
 
-},{"../core/core.defaults":23,"../elements/index":38,"../helpers/index":43}],49:[function(require,module,exports){
+},{"../core/core.defaults":27,"../elements/index":42,"../helpers/index":47}],53:[function(require,module,exports){
 'use strict';
 
 var defaults = require('../core/core.defaults');
@@ -10601,7 +11032,7 @@ module.exports = {
 	}
 };
 
-},{"../core/core.defaults":23,"../core/core.element":24,"../core/core.layouts":28,"../helpers/index":43}],50:[function(require,module,exports){
+},{"../core/core.defaults":27,"../core/core.element":28,"../core/core.layouts":32,"../helpers/index":47}],54:[function(require,module,exports){
 'use strict';
 
 var defaults = require('../core/core.defaults');
@@ -10855,7 +11286,7 @@ module.exports = {
 	}
 };
 
-},{"../core/core.defaults":23,"../core/core.element":24,"../core/core.layouts":28,"../helpers/index":43}],51:[function(require,module,exports){
+},{"../core/core.defaults":27,"../core/core.element":28,"../core/core.layouts":32,"../helpers/index":47}],55:[function(require,module,exports){
 'use strict';
 
 var Scale = require('../core/core.scale');
@@ -10992,7 +11423,7 @@ module.exports = function() {
 	scaleService.registerScaleType('category', DatasetScale, defaultConfig);
 };
 
-},{"../core/core.scale":30,"../core/core.scaleService":31}],52:[function(require,module,exports){
+},{"../core/core.scale":34,"../core/core.scaleService":35}],56:[function(require,module,exports){
 'use strict';
 
 var defaults = require('../core/core.defaults');
@@ -11186,7 +11617,7 @@ module.exports = function(Chart) {
 	scaleService.registerScaleType('linear', LinearScale, defaultConfig);
 };
 
-},{"../core/core.defaults":23,"../core/core.scaleService":31,"../core/core.ticks":32,"../helpers/index":43}],53:[function(require,module,exports){
+},{"../core/core.defaults":27,"../core/core.scaleService":35,"../core/core.ticks":36,"../helpers/index":47}],57:[function(require,module,exports){
 'use strict';
 
 var helpers = require('../helpers/index');
@@ -11385,7 +11816,7 @@ module.exports = function(Chart) {
 	});
 };
 
-},{"../core/core.scale":30,"../helpers/index":43}],54:[function(require,module,exports){
+},{"../core/core.scale":34,"../helpers/index":47}],58:[function(require,module,exports){
 'use strict';
 
 var helpers = require('../helpers/index');
@@ -11736,7 +12167,7 @@ module.exports = function(Chart) {
 	scaleService.registerScaleType('logarithmic', LogarithmicScale, defaultConfig);
 };
 
-},{"../core/core.scale":30,"../core/core.scaleService":31,"../core/core.ticks":32,"../helpers/index":43}],55:[function(require,module,exports){
+},{"../core/core.scale":34,"../core/core.scaleService":35,"../core/core.ticks":36,"../helpers/index":47}],59:[function(require,module,exports){
 'use strict';
 
 var defaults = require('../core/core.defaults');
@@ -12268,7 +12699,7 @@ module.exports = function(Chart) {
 	scaleService.registerScaleType('radialLinear', LinearRadialScale, defaultConfig);
 };
 
-},{"../core/core.defaults":23,"../core/core.scaleService":31,"../core/core.ticks":32,"../helpers/index":43}],56:[function(require,module,exports){
+},{"../core/core.defaults":27,"../core/core.scaleService":35,"../core/core.ticks":36,"../helpers/index":47}],60:[function(require,module,exports){
 /* global window: false */
 'use strict';
 
@@ -13055,7 +13486,7 @@ module.exports = function() {
 	scaleService.registerScaleType('time', TimeScale, defaultConfig);
 };
 
-},{"../core/core.defaults":23,"../core/core.scale":30,"../core/core.scaleService":31,"../helpers/index":43,"moment":62}],57:[function(require,module,exports){
+},{"../core/core.defaults":27,"../core/core.scale":34,"../core/core.scaleService":35,"../helpers/index":47,"moment":66}],61:[function(require,module,exports){
 /* MIT license */
 var colorNames = require('color-name');
 
@@ -13278,7 +13709,7 @@ for (var name in colorNames) {
    reverseNames[colorNames[name]] = name;
 }
 
-},{"color-name":61}],58:[function(require,module,exports){
+},{"color-name":65}],62:[function(require,module,exports){
 /* MIT license */
 var convert = require('color-convert');
 var string = require('chartjs-color-string');
@@ -13765,7 +14196,7 @@ if (typeof window !== 'undefined') {
 
 module.exports = Color;
 
-},{"chartjs-color-string":57,"color-convert":60}],59:[function(require,module,exports){
+},{"chartjs-color-string":61,"color-convert":64}],63:[function(require,module,exports){
 /* MIT license */
 
 module.exports = {
@@ -14465,7 +14896,7 @@ for (var key in cssKeywords) {
   reverseKeywords[JSON.stringify(cssKeywords[key])] = key;
 }
 
-},{}],60:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 var conversions = require("./conversions");
 
 var convert = function() {
@@ -14558,7 +14989,7 @@ Converter.prototype.getValues = function(space) {
 });
 
 module.exports = convert;
-},{"./conversions":59}],61:[function(require,module,exports){
+},{"./conversions":63}],65:[function(require,module,exports){
 module.exports = {
 	"aliceblue": [240, 248, 255],
 	"antiquewhite": [250, 235, 215],
@@ -14709,7 +15140,7 @@ module.exports = {
 	"yellow": [255, 255, 0],
 	"yellowgreen": [154, 205, 50]
 };
-},{}],62:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 //! moment.js
 
 ;(function (global, factory) {
@@ -15971,7 +16402,7 @@ module.exports = {
 
     var defaultLocaleWeek = {
         dow : 0, // Sunday is the first day of the week.
-        doy : 6  // The week that contains Jan 1st is the first week of the year.
+        doy : 6  // The week that contains Jan 6th is the first week of the year.
     };
 
     function localeFirstDayOfWeek () {
@@ -16847,13 +17278,13 @@ module.exports = {
                     weekdayOverflow = true;
                 }
             } else if (w.e != null) {
-                // local weekday -- counting starts from begining of week
+                // local weekday -- counting starts from beginning of week
                 weekday = w.e + dow;
                 if (w.e < 0 || w.e > 6) {
                     weekdayOverflow = true;
                 }
             } else {
-                // default to begining of week
+                // default to beginning of week
                 weekday = dow;
             }
         }
@@ -17447,7 +17878,7 @@ module.exports = {
             years = normalizedInput.year || 0,
             quarters = normalizedInput.quarter || 0,
             months = normalizedInput.month || 0,
-            weeks = normalizedInput.week || 0,
+            weeks = normalizedInput.week || normalizedInput.isoWeek || 0,
             days = normalizedInput.day || 0,
             hours = normalizedInput.hour || 0,
             minutes = normalizedInput.minute || 0,
@@ -17751,7 +18182,7 @@ module.exports = {
                 ms : toInt(absRound(match[MILLISECOND] * 1000)) * sign // the millisecond decimal point is included in the match
             };
         } else if (!!(match = isoRegex.exec(input))) {
-            sign = (match[1] === '-') ? -1 : (match[1] === '+') ? 1 : 1;
+            sign = (match[1] === '-') ? -1 : 1;
             duration = {
                 y : parseIso(match[2], sign),
                 M : parseIso(match[3], sign),
@@ -17902,7 +18333,7 @@ module.exports = {
         if (!(this.isValid() && localInput.isValid())) {
             return false;
         }
-        units = normalizeUnits(!isUndefined(units) ? units : 'millisecond');
+        units = normalizeUnits(units) || 'millisecond';
         if (units === 'millisecond') {
             return this.valueOf() > localInput.valueOf();
         } else {
@@ -17915,7 +18346,7 @@ module.exports = {
         if (!(this.isValid() && localInput.isValid())) {
             return false;
         }
-        units = normalizeUnits(!isUndefined(units) ? units : 'millisecond');
+        units = normalizeUnits(units) || 'millisecond';
         if (units === 'millisecond') {
             return this.valueOf() < localInput.valueOf();
         } else {
@@ -17924,9 +18355,14 @@ module.exports = {
     }
 
     function isBetween (from, to, units, inclusivity) {
+        var localFrom = isMoment(from) ? from : createLocal(from),
+            localTo = isMoment(to) ? to : createLocal(to);
+        if (!(this.isValid() && localFrom.isValid() && localTo.isValid())) {
+            return false;
+        }
         inclusivity = inclusivity || '()';
-        return (inclusivity[0] === '(' ? this.isAfter(from, units) : !this.isBefore(from, units)) &&
-            (inclusivity[1] === ')' ? this.isBefore(to, units) : !this.isAfter(to, units));
+        return (inclusivity[0] === '(' ? this.isAfter(localFrom, units) : !this.isBefore(localFrom, units)) &&
+            (inclusivity[1] === ')' ? this.isBefore(localTo, units) : !this.isAfter(localTo, units));
     }
 
     function isSame (input, units) {
@@ -17935,7 +18371,7 @@ module.exports = {
         if (!(this.isValid() && localInput.isValid())) {
             return false;
         }
-        units = normalizeUnits(units || 'millisecond');
+        units = normalizeUnits(units) || 'millisecond';
         if (units === 'millisecond') {
             return this.valueOf() === localInput.valueOf();
         } else {
@@ -17945,11 +18381,11 @@ module.exports = {
     }
 
     function isSameOrAfter (input, units) {
-        return this.isSame(input, units) || this.isAfter(input,units);
+        return this.isSame(input, units) || this.isAfter(input, units);
     }
 
     function isSameOrBefore (input, units) {
-        return this.isSame(input, units) || this.isBefore(input,units);
+        return this.isSame(input, units) || this.isBefore(input, units);
     }
 
     function diff (input, units, asFloat) {
@@ -19168,7 +19604,7 @@ module.exports = {
     // Side effect imports
 
 
-    hooks.version = '2.22.2';
+    hooks.version = '2.23.0';
 
     setHookCallback(createLocal);
 
@@ -19209,7 +19645,7 @@ module.exports = {
         TIME: 'HH:mm',                                  // <input type="time" />
         TIME_SECONDS: 'HH:mm:ss',                       // <input type="time" step="1" />
         TIME_MS: 'HH:mm:ss.SSS',                        // <input type="time" step="0.001" />
-        WEEK: 'YYYY-[W]WW',                             // <input type="week" />
+        WEEK: 'GGGG-[W]WW',                             // <input type="week" />
         MONTH: 'YYYY-MM'                                // <input type="month" />
     };
 

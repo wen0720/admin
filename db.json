@@ -1,43 +1,148 @@
-{
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "yo"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "title": "IamTitle",
-      "author": "me"
-    },
-    {
-      "id": 2,
-      "title": "newPost4",
-      "author": "tim"
-    },
-    {
-      "id": 3,
-      "title": "newPost4",
-      "author": "tim"
-    },
-    {
-      "id": 4,
-      "title": "n1ewPost4",
-      "author": "tim"
-    },
-    {
-      "id": 5,
-      "title": "newPost4",
-      "author": "tim"
-    }
-  ],
-  "puys": [
-    {
-      "id": 1,
-      "title": "justTest",
-      "author": "tired"
-    }
+{ 
+  "Daily": [
+        {
+          "id": 1,
+          "year": 2019,
+          "month": "Jan",
+          "day": 1,
+          "revenue": 5600,
+          "cost": 4000,
+          "netIncome": 1600
+        },
+        {
+          "id": 2,
+          "year": 2019,
+          "month": "Jan",
+          "day": 2,
+          "revenue": 7700,
+          "cost": 5400,
+          "netIncome": 2300
+        },
+        {
+          "id": 3,
+          "year": 2019,
+          "month": "Jan",
+          "day": 3,
+          "revenue": 7330,
+          "cost": 3840,
+          "netIncome": 3490
+        },
+        {
+          "id": 4,
+          "year": 2019,
+          "month": "Jan",
+          "day": 4,
+          "revenue": 6200,
+          "cost": 4390,
+          "netIncome": 1810
+        },
+        {
+          "id": 5,
+          "year": 2019,
+          "month": "Jan",
+          "day": 5,
+          "revenue": 5200,
+          "cost": 3200,
+          "netIncome": 2000
+        },
+        {
+          "id": 6,
+          "year": 2019,
+          "month": "Jan",
+          "day": 6,
+          "revenue": 6500,
+          "cost": 5000,
+          "netIncome": 1500
+        },
+        {
+          "id": 7,
+          "year": 2019,
+          "month": "Jan",
+          "day": 7,
+          "revenue": 6700,
+          "cost": 4500,
+          "netIncome": 2200
+        },
+        {
+          "id": 8,
+          "year": 2019,
+          "month": "Jan",
+          "day": 8,
+          "revenue": 7200,
+          "cost": 5000,
+          "netIncome": 2200
+        },
+        {
+          "id": 9,
+          "year": 2019,
+          "month": "Jan",
+          "day": 9,
+          "revenue": 5800,
+          "cost": 4200,
+          "netIncome": 1600
+        },
+        {
+          "id": 10,
+          "year": 2019,
+          "month": "Jan",
+          "day": 10,
+          "revenue": 5200,
+          "cost": 2000,
+          "netIncome": 3200
+        },
+        {
+          "id": 11,
+          "year": 2019,
+          "month": "Jan",
+          "day": 11,
+          "revenue": 6500,
+          "cost": 3000,
+          "netIncome": 3500
+        },
+        {
+          "id": 12,
+          "year": 2019,
+          "month": "Jan",
+          "day": 12,
+          "revenue": 6200,
+          "cost": 4990,
+          "netIncome": 1210
+        },
+        {
+          "id": 13,
+          "year": 2019,
+          "month": "Jan",
+          "day": 13,
+          "revenue": 2100,
+          "cost": 1400,
+          "netIncome": 700
+        },
+        {
+          "id": 14,
+          "year": 2019,
+          "month": "Jan",
+          "day": 14,
+          "revenue": 5600,
+          "cost": 4000,
+          "netIncome": 1600
+        },
+        {
+          "id": 15,
+          "year": 2019,
+          "month": "Jan",
+          "day": 15,
+          "revenue": 7600,
+          "cost": 4500,
+          "netIncome": 3100
+        },
+        {
+          "id": 16,
+          "year": 2019,
+          "month": "Jan",
+          "day": 16,
+          "revenue": 2700,
+          "cost": 1000,
+          "netIncome": 1700
+        }                       
   ]
-}
+}  

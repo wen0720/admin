@@ -1,5 +1,10 @@
-const chart = require('./chart.js');
-import Menu from './menu.js'
+// const chart = require('./chart.js');
+import chart from './chart'
+import Menu from './menu'
+import filter from './filter'
+import file from './file'
 
-let menuFuc = new Menu();
-chart.drawChart();
+new Menu();
+new filter;
+new chart();
+new file();

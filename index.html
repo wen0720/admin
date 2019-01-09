@@ -52,7 +52,7 @@
                                 <i class="fas fa-hand-holding-usd"></i>
                                 <span>TOTAL REVENUE</span>
                             </p>
-                            <p class="color-rev">54,540</p>
+                            <p id="js-revenueNum" class="color-rev">54,540</p>
                         </div>
                     </div>
                     <div class="innerBox01 bg01">
@@ -61,7 +61,7 @@
                                 <i class="fas fa-yen-sign"></i>                                
                                 <span>TOTAL COST</span>
                             </p>
-                            <p class="color-cost">54,540</p>
+                            <p id="js-costNum" class="color-cost">54,540</p>
                         </div>
                     </div>
                     <div class="innerBox01 bg01">
@@ -70,7 +70,7 @@
                                 <i class="far fa-money-bill-alt"></i>
                                 <span>TOTAL INCOME</span>
                             </p>
-                            <p class="color-income">54,540</p>
+                            <p id="js-incomeNum" class="color-income">54,540</p>
                         </div>
                     </div>
                 </div>                
@@ -209,32 +209,19 @@
     </div>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>     -->
     <script src="dist/bundle.js"></script>
-    <script>        
-        let xhr = new XMLHttpRequest();                
-        var myPromise1 = new Promise(function(resolve, reject){                                                   
-                xhr.open('GET','http://localhost:3000/comments/')                
-                xhr.setRequestHeader('Content-type', 'application/json')                
-                xhr.send();        
-                xhr.onload = function (){                                        
-                    if(xhr.status === 200){
-                        resolve({
-                            data: xhr.responseText,
-                            success: '成功拿到資料'
-                        })                                                       
-                    }else{                        
-                        reject('連線錯誤')
-                    }
-                }                        
-            });        
-        myPromise1.then(function(res){
-            //資料處理程式碼...
-            if(xhr.responseText){                
-                console.log(res)
-            }else{                
-                console.log(res)
+    <!-- <script>        
+        let xhr = new XMLHttpRequest();                        
+        xhr.open('GET','http://localhost:3000/Daily/')                
+        xhr.setRequestHeader('Content-type', 'application/json')                
+        xhr.send();        
+        xhr.onload = function (){                                        
+            if(xhr.status === 200){                
+                console.log(xhr.responseText)
+            }else{                        
+                console.log('錯誤錯誤')
             }
-        });
+        }                                    
                       
-    </script>
+    </script> -->
 </body>
 </html>

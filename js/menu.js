@@ -12,15 +12,15 @@ export default class Menu{
         for (let i=0; i< this.menuBtn.length; i++){
             this.menuBtn[i].addEventListener('click', function(e){                                
                     // .bind(this)(e) 把點擊的物件(this)傳進showMenu裡，並帶事件參數e進去
-                if(!_this.isOpen){
-                    _this.showMenu.bind(this)(e)
-                    _this.ifOneMenuOpen();      
+                if(!_this.isOpen){  // 如果沒有任何menu開啟
+                    _this.showMenu.bind(this)(e)  
+                    _this.ifOneMenuOpen(); // 有任一menu開啟，this.open = true      
                 }                                     
             })                  
         }        
 
-        // closeMenu
-        this.body.addEventListener('click', function(){
+        // body 綁定 closeMenu事件
+        this.body.addEventListener('click', function(){            
             if(!document.querySelector('.menubox.active')){
                 return;
             }                                 
@@ -30,26 +30,51 @@ export default class Menu{
         // changeMenuContent
         for (let i=0; i< this.menubox.length; i++){
             this.menubox[i].addEventListener('click', function(e){ 
-                e.stopPropagation()                                                          
+                e.stopPropagation()                                                                         
                 let txt = e.target.textContent;                
                 let parent = this.parentNode;
                 let sib = _this.siblingElem(this);
                 let isBtn = parent.classList.value.split(' ').some(item => item === 'btn')
 
-                let menuTxtItem = sib.filter((item) => {                    
+                let menuTxtItem = sib.filter((item) => {           //抓js-menuTxt         
                     let classArr = Array.prototype.slice.call(item.classList);
                     let menuTxt = classArr.some((item) => {
                         return item === 'js-menuTxt'
                     })
                     return menuTxt;
-                })                
-
-                // change btn color
-                if(isBtn){
+                })                                                
+                            
+                
+                // change btn & tr status
+                if(isBtn){                    
+                    let parentTr = _this.parentElem(this,'js-tr').pop();                                            
+                    let parentClassArr = parentTr.classList.value.split(' ');
+                    let oldStatusIsUnpaid = parentClassArr.some(item => item === 'unpaid')
+                    let oldStatusIsDone = parentClassArr.some(item => item === 'done')
+                    
                     parent.classList.remove(menuTxtItem[0].textContent.toLowerCase())
                     parent.classList.add(txt.toLowerCase())
+
+                    if(txt.toLowerCase() === 'done'){                                                                                        
+                        if(oldStatusIsUnpaid){
+                            parentTr.classList.remove('unpaid')
+                        }                        
+                        parentTr.classList.add('done')
+                    }
+
+                    if(txt.toLowerCase() === 'unpaid'){                                                                                      
+                        if(oldStatusIsDone){
+                            parentTr.classList.remove('done')
+                        }                        
+                        parentTr.classList.add('unpaid')
+                    }
+
+                    if(txt.toLowerCase() === 'shipping' || txt.toLowerCase() === 'paid'){
+                        parentTr.classList.remove('done')
+                        parentTr.classList.remove('unpaid')
+                    }                                                                            
                 }
-                
+
                 // change text
                 if(menuTxtItem.length) {       
                     if(isBtn){
@@ -59,6 +84,7 @@ export default class Menu{
                     }                                 
                     _this.closeMenu();                  
                 }
+
             })
         }
 
@@ -68,8 +94,7 @@ export default class Menu{
     showMenu(e){                
         e.stopPropagation()             
         let btnChildren = this.children;     
-        // console.log(e.target)   
-        console.log(this)
+        // console.log(e.target)           
         for (let i=0, max=btnChildren.length; i<max; i++){                           
             if(btnChildren[i].nodeName === 'UL' && !( e.target.nodeName === 'LI' ) ) {                                                
                 let arr = [];
@@ -104,7 +129,7 @@ export default class Menu{
 
     //find siblingElem
     siblingElem(elem) {
-        var _nodes = [],
+        let _nodes = [],
             //把elem 另外先存在_elem 
             _elem = elem;
             //elem的前一個node存在的話 
@@ -122,5 +147,27 @@ export default class Menu{
             }
         }
         return _nodes;
+    }
+
+    // find parentNode
+    /**** 
+     * {
+     *  elem: 當下的元素
+     *  parentClass: 想要找到的父層class
+     * }
+    */
+    parentElem(elem, parentClass){
+        let _nodes = [],            
+            isParentClass
+
+        do{
+            elem = elem.parentNode
+            _nodes.push(elem)
+            isParentClass = elem.classList.value.split(' ').some(item => {
+                return item === parentClass
+            })                
+        }while(!isParentClass)        
+
+        return _nodes
     }
 }
