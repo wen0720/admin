@@ -1,0 +1,136 @@
+@import 'default';
+@import 'config';
+@import 'mixins';
+@import 'form';
+@import 'animate';
+@import 'layout';
+@import 'component';
+@import 'nav';
+@import 'footer';
+
+
+
+.title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.date{
+    display: flex;
+    .district{
+        padding: 0 20px 0 0;
+        .tri{
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 4.5px 0 4.5px 5px;
+            border-color: transparent transparent transparent #000000;
+            margin:0 5px;
+        }
+        span{
+            color:#9b9b9b;
+        }
+    }    
+}
+
+.fliter{
+    position: relative;
+    .active{
+        display: inline-block;
+        &.light{
+            color:#9b9b9b;
+            font-size: 16px;
+        }
+        &.dark{
+            color:#000;
+            font-size: 14px;
+            font-weight: bold;
+        }        
+        &.bg-dark{
+            font-size: 14px;
+            font-weight:bold;
+            background: #000;
+            color:#fff;
+            padding: 6px 10px;
+        }
+    }    
+}
+
+.triDown{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 4.5px 0 4.5px;    
+    margin: 0 5px;
+    vertical-align: middle;
+    &.dark{
+        border-color: #000000 transparent transparent transparent;
+    }
+    &.light{
+        border-color: #ffffff transparent transparent transparent;
+    }
+}
+
+
+.view{    
+    .overView{        
+        $colorList1:(
+            'color-rev': #7ED321,
+            'color-cost': #4A90E2,
+            'color-income': #D0021B
+        );
+        @each $color in color-rev, color-cost, color-income{
+            p.#{$color}{
+                color: map-get($colorList1, $color )
+            }
+        }        
+        p:first-child{
+            margin: 8px 0;
+            span{
+                display: inline;            
+                vertical-align: middle;
+                padding: 0 0 0 5px;
+            }
+            img{
+                max-width: 30px;            
+            }
+            i{
+                font-size: 22px;
+                vertical-align: middle;
+            }
+        }    
+        p:nth-child(2){
+            font-size: 36px;
+            font-weight:bold;
+        }
+    }
+}
+
+.orderList{
+    .txtBox{
+        text-align: left;
+        padding: 0 0 0 20px;        
+        h3{
+            margin: 0;
+        }
+        p{
+            padding: 5px 0;
+            img{
+                max-width: 10px;
+            }            
+        }
+    }
+    .sum{
+        p{
+            text-align: right;
+            &:nth-child(2){
+                font-size: 20px;
+            }
+        }
+    }
+}
+

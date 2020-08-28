@@ -1,0 +1,135 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Helvetica, Arial, sans-serif;
+    background: #F2F2F2;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.wrapper{
+    // max-width: 1024px;
+    // margin: 0 auto;
+}
+
+header{
+    background: #000;
+}
+
+.container{
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.row{
+    margin:0 0 20px 0;
+}
+
+.box01{
+    display: flex;
+    flex-wrap: wrap;
+    .innerBox01:last-child{
+        margin-right: 0;
+    }
+}
+
+.box02{
+    padding: 20px 30px;
+}
+
+.bg01{
+    background: #fff;
+    box-shadow: 0 0 10px 5px #EBEBEB;
+    border-radius: 3px;
+}
+
+.innerBox01{    
+    flex:1;
+    margin-right: 2%;
+    padding: 20px 20px;
+    text-align: center;
+}
+
+.title{
+    h2{
+        margin: 0;
+    }    
+}
+
+//margin 設定(搭flex
+.mg{
+    &-l-auto{
+        margin-left: auto;
+    }
+    &-r-auto{
+        margin-right: auto;
+    }
+}
+
+// flex 設定
+.flex{
+   display: flex; 
+}
+
+.justify{
+    &-left{
+        justify-content: left;
+    }
+    &-sb{
+        justify-content: space-between;
+    }    
+}
+.align{
+    &-center{
+        align-items: center;
+    }
+    &-end{
+        align-items: flex-end;
+    }    
+    &-s-center{
+        align-self: center;
+    }
+}
+
+//list設定
+.list{
+    &__borderBottom{                
+        padding: 17px 0;        
+        border-bottom:1px solid #EBEBEB;
+        &.sm{
+            padding: 8px 0;        
+        }        
+        &.last{
+            border:none;
+        }
+        .imgBox{
+            img{
+                max-width: 50px;
+            }
+            p{
+                display: inline-block;
+            }
+        }    
+        >p{
+            font-size: 20px;
+        }
+        .plus{
+            color: #7ED321;
+            font-size: 16px;
+            cursor: pointer;
+            img{
+                max-width: 18px;
+            }
+        }     
+    }
+}
+
+.borderR{
+    &-5px{
+        border-radius: 5px;
+    }
+}

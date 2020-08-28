@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/m.min.css">    
+</head>
+<body>
+    <div id="app" class="wrapper"  @click="closeMenu">
+        <header>
+            <nav>                
+                <h1>Shoptime</h1>
+                <ul>                        
+                    <li><a href="./index.html">HOME</a></li>
+                    <li><a href="./order.html">ORDERS</a></li>
+                    <li><a href="./product.html">PRODUCT</a></li>
+                </ul>                
+                <div class="login"><a href="#">ADMIN</a></div>
+            </nav>
+        </header>
+        <div class="container">
+            <!-- <div class="row"> -->
+                <div class="title">
+                    <h2>OVERVIEW</h2>
+                    <div class="date">
+                        <div class="district">
+                            <span>{{ startDate }}</span>
+                            <div class="tri"></div>
+                            <span>{{ endDate }}</span>
+                        </div>
+                        <div class="fliter js-menu" @click.stop="openMenu">
+                            <div class="active light js-menuTxt">{{`${nowDate['day']} ${nowDate['month']}`}}</div><div class="triDown dark"></div>
+                            <ul class="menubox ulli" :class="{active: menuboxShow}">
+                                <li v-for="item in dateArr" @click="renderData">
+                                    {{ item }}
+                                </li>
+                                <!-- <li>Daily</li>
+                                <li>Weekly</li>
+                                <li>Monthly</li>
+                                <li>Yearly</li>
+                                <li>Custom</li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <!-- </div> -->
+            <div class="row view">
+                <div class="box01">
+                    <div class="innerBox01 bg01">
+                        <div class="overView">
+                            <p>                                
+                                <i class="fas fa-hand-holding-usd"></i>
+                                <span>TOTAL REVENUE</span>
+                            </p>
+                            <p id="js-revenueNum" class="color-rev">{{ totalRevenue }}</p>
+                        </div>
+                    </div>
+                    <div class="innerBox01 bg01">
+                        <div class="overView">
+                            <p>
+                                <i class="fas fa-yen-sign"></i>                                
+                                <span>TOTAL COST</span>
+                            </p>
+                            <p id="js-costNum" class="color-cost">{{ totalCost }}</p>
+                        </div>
+                    </div>
+                    <div class="innerBox01 bg01">
+                        <div class="overView">
+                            <p>
+                                <i class="far fa-money-bill-alt"></i>
+                                <span>TOTAL INCOME</span>
+                            </p>
+                            <p id="js-incomeNum" class="color-income">{{ totalIncome }}</p>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="box02 bg01">
+                    <div class="title">
+                        <h2>Activity</h2>
+                    </div>
+                    <canvas id="lineChart"></canvas>                
+                </div>
+            </div>
+            <div class="row">
+                <div class="box01">
+                    <div class="innerBox01 bg01">
+                        <div class="title">
+                            <h2>Transaction Website</h2>
+                        </div>                        
+                        <ul>
+                            <li class="flex list__borderBottom justify-sb align-center">
+                                <div class="imgBox">
+                                    <img src="images/icon-fb.png" alt="">
+                                    <p>Facebook.com</p>
+                                </div>                                                             
+                                <p>45,836</p>
+                                <div class="plus">
+                                    <img src="images/icon-arrowUp.png" alt="">
+                                    <span>20%</span>
+                                </div>
+                            </li>
+                            <li class="flex list__borderBottom justify-sb align-center">
+                                <div class="imgBox">
+                                    <img src="images/icon-google.png" alt="">
+                                    <p>Facebook.com</p>
+                                </div>                                                             
+                                <p>45,836</p>
+                                <div class="plus">
+                                    <img src="images/icon-arrowUp.png" alt="">
+                                    <span>20%</span>
+                                </div>
+                            </li>
+                            <li class="flex list__borderBottom justify-sb align-center">
+                                <div class="imgBox">
+                                    <img src="images/icon-shopify.png" alt="">
+                                    <p>Facebook.com</p>
+                                </div>                                                             
+                                <p>45,836</p>
+                                <div class="plus">
+                                    <img src="images/icon-arrowDown.png" alt="">
+                                    <span>20%</span>
+                                </div>
+                            </li>
+                            <li class="flex list__borderBottom justify-sb align-center last">
+                                <div class="imgBox">
+                                    <img src="images/icon-wordPress.jpg" alt="">
+                                    <p>Facebook.com</p>
+                                </div>                                                             
+                                <p>45,836</p>
+                                <div class="plus">
+                                    <img src="images/icon-arrowUp.png" alt="">
+                                    <span>20%</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="innerBox01 bg01">
+                        <div class="title">
+                            <h2>Latest Orders</h2>
+                        </div>                                                  
+                        <ul class="orderList">
+                            <li class="flex list__borderBottom justify-left align-end sm">
+                                <figure>
+                                    <img src="https://fakeimg.pl/100x100/eeeeee/">
+                                </figure>
+                                <div class="txtBox align-s-center">
+                                    <h3>Vintage T-shirt</h3>
+                                    <p>
+                                        <img src="images/icon-time.png" alt="">
+                                        <span>2018/06/13 13:42</span>
+                                    </p>
+                                    <p>
+                                        <img src="images/icon-people.png" alt="">
+                                        <span>Belle Willis</span>
+                                    </p>
+                                </div>
+                                <div class="sum mg-l-auto">
+                                    <p>Total</p>
+                                    <p>3,200</p>
+                                </div>
+                            </li>
+                            <li class="flex list__borderBottom justify-left align-end sm">
+                                <figure>
+                                    <img src="https://fakeimg.pl/100x100/eeeeee/">
+                                </figure>
+                                <div class="txtBox align-s-center">
+                                    <h3>Vintage T-shirt</h3>
+                                    <p>
+                                        <img src="images/icon-time.png" alt="">
+                                        <span>2018/06/13 13:42</span>
+                                    </p>
+                                    <p>
+                                        <img src="images/icon-people.png" alt="">
+                                        <span>Belle Willis</span>
+                                    </p>
+                                </div>
+                                <div class="sum mg-l-auto">
+                                    <p>Total</p>
+                                    <p>3,200</p>
+                                </div>
+                            </li>
+                            <li class="flex list__borderBottom justify-left align-end sm last">
+                                <figure>
+                                    <img src="https://fakeimg.pl/100x100/eeeeee/">
+                                </figure>
+                                <div class="txtBox">
+                                    <h3>Vintage T-shirt</h3>
+                                    <p>
+                                        <img src="images/icon-time.png" alt="">
+                                        <span>2018/06/13 13:42</span>
+                                    </p>
+                                    <p>
+                                        <img src="images/icon-people.png" alt="">
+                                        <span>Belle Willis</span>
+                                    </p>
+                                </div>
+                                <div class="sum mg-l-auto">
+                                    <p>Total</p>
+                                    <p>3,200</p>
+                                </div>
+                            </li>
+                        </ul>                    
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+    <!-- <script src="dist/bundle.js"></script> -->
+    <script>                
+        
+        const vm = new Vue({
+            el : '#app',
+            data: {
+                month: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                revenueArr: [],
+                costArr: [],
+                incomeArr: [],
+                dateArr: [],                
+                startDate:'',
+                endDate: '',
+                nowDate:{
+                    day: 1,
+                    month: 'Jan'
+                },         
+                menuboxShow: false, 
+            },
+            methods: {
+                getTime(date){        
+                    let day = moment(date, "YYYY MM DD").format('D');
+                    let month = moment(date, "YYYY MM DD").format('MMM');        
+                    return {
+                        day,
+                        month
+                    }                            
+                },               
+                
+                getdata(url, date, callback){
+                    fetch(url).then( res => {
+                        return res.json()
+                    }).then( res => {
+                        this.nowDate = this.getTime(date)
+
+                        this.costArr = [];
+                        this.revenueArr = [];
+                        this.incomeArr = [];
+                        this.dateArr = [];
+
+                        // 找目前日期在資料中的位置，無法在陣列中比對物件，先把day map出一個新陣列，再用indexOf去查位置
+                        let nowDateIndex = res.map((item, idx) =>{
+                            return item.day
+                        }).indexOf(Number(this.nowDate.day))         
+                                                
+                        // if(nowDateIndex < 3){
+                        //     let periodRes = res.slice(0, 7 - nowDateIndex+1)
+                        // }else {
+                        //     let periodRes = res.slice(nowDateIndex-3, nowDateIndex+3+1) // slice 不會包含end的物件，但我要抓前後3個，故最後在+1
+                        // }                        
+
+                        let periodRes = nowDateIndex < 3 ? res.slice(0, 7) 
+                                        : res.slice(nowDateIndex-3, nowDateIndex+3+1) // slice 不會包含end的物件，但我要抓前後3個，故最後在+1                                         
+                        let periodResLen = periodRes.length;                        
+                        
+                        periodRes.forEach(item => {
+                            this.costArr.push(item.cost)
+                            this.revenueArr.push(item.revenue)
+                            this.incomeArr.push(item.netIncome)
+                            this.dateArr.push(`${item.day} ${this.month[item.month]}`)
+                        })                                
+
+                        this.startDate = `${periodRes[0].year}/${periodRes[0].month + 1}/${periodRes[0].day}`
+                        this.endDate = `${periodRes[periodResLen - 1].year}/${periodRes[periodResLen - 1].month + 1}/${periodRes[periodResLen - 1].day}`
+
+                        callback();
+                    })
+                },
+
+                newChart(){                                        
+                    let ctx = document.getElementById('lineChart').getContext('2d');   
+                    let vm = this                    
+                    return new Chart(ctx, {
+                        // The type of chart we want to create
+                        type: 'line',
+                
+                        // The data for our dataset
+                        data: {
+                            xLabels: vm.dateArr,
+                            datasets: [{                                             
+                                label: "revenue",                        
+                                data: vm.revenueArr,
+                                fill: false,   
+                                backgroundColor: 'rgba(126,211,33,1)',
+                                borderColor:'rgba(126,211,33,1)'                                       
+                            },{                                             
+                                label: "cost",                        
+                                data: vm.costArr,
+                                fill: false,           
+                                backgroundColor: 'rgba(74,144,226,1)',
+                                borderColor:'rgba(74,144,226,1)'               
+                            },{                                             
+                                label: "income",                        
+                                data: vm.incomeArr,
+                                fill: false,           
+                                backgroundColor: 'rgba(208,2,27,1)',
+                                borderColor:'rgba(208,2,27,1)'                                         
+                            }]                    
+                        },
+                
+                        // Configuration options go here
+                        options: {
+                            legend:{
+                                display: false
+                            },
+                            elements:{
+                                line:{
+                                    tension:0,
+                                    borderWidth:0,                            
+                                }
+                            },                            
+                            scales:{
+                                xAxes:[{                                    
+                                    ticks: {
+                                        display: true,
+                                        fontSize: 16,                                
+                                    },
+                                    gridLines: {
+                                        display:false,      
+                                                                
+                                    }  
+                                }],
+                                yAxes:[{                                    
+                                    gridLines:{                                                                
+                                        drawTicks:false,                                                                                                
+                                    },
+                                    ticks: {                                                                
+                                        fontSize: 16,                                                     
+                                        max: 8000,
+                                        min: 0,
+                                        stepSize: 2000,                                 
+                                        callback: function(value, index, values) {                                            
+                                            let newValue
+                                            if (value > 1000){
+                                                let valueArrStr = ('' + value).split('');  
+                                                valueArrStr.splice(1,0,',');
+                                                newValue = valueArrStr.join('');                                                
+                                            }                                    
+                                            return newValue;
+                                        }                                
+                                    }
+                                }]                        
+                            }
+                        }
+                    });
+                },
+
+                openMenu(){
+                    this.menuboxShow = true;
+                },
+
+                closeMenu(){                    
+                    this.menuboxShow = false;
+                },
+                renderData(e){
+                    let date = e.target.textContent.trim().split(' ');
+                    let monthTxt = date.pop();
+                    let monthNum = this.month.indexOf(monthTxt) + 1 ;
+                    this.getdata('http://localhost:3000/Daily', `2019-${monthNum}-${date}`, () => {
+                        this.newChart();     
+                    })                     
+                }
+            },
+            computed: {
+                totalRevenue(){                                                            
+                    return this.revenueArr.reduce((total, item) =>  total += item ,0)                                        
+                },
+                totalCost(){                                                            
+                    return this.costArr.reduce((total, item) =>  total += item ,0)                                        
+                },
+                totalIncome(){
+                    return this.incomeArr.reduce((total, item) =>  total += item ,0)                                        
+                }
+            },
+            created() {
+                this.getdata('http://localhost:3000/Daily', '2019-1-12', () => {
+                    this.newChart();     
+                })                
+            },
+            mounted(){                                                               
+            }
+        })                                
+                      
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,830 @@
+{ 
+  "Daily": [
+        {
+          "id": 1,
+          "year": 2019,
+          "month": 0,
+          "day": 1,
+          "revenue": 5600,
+          "cost": 4000,
+          "netIncome": 1600
+        },
+        {
+          "id": 2,
+          "year": 2019,
+          "month": 0,
+          "day": 2,
+          "revenue": 7700,
+          "cost": 5400,
+          "netIncome": 2300
+        },
+        {
+          "id": 3,
+          "year": 2019,
+          "month": 0,
+          "day": 3,
+          "revenue": 7330,
+          "cost": 3840,
+          "netIncome": 3490
+        },
+        {
+          "id": 4,
+          "year": 2019,
+          "month": 0,
+          "day": 4,
+          "revenue": 6200,
+          "cost": 4390,
+          "netIncome": 1810
+        },
+        {
+          "id": 5,
+          "year": 2019,
+          "month": 0,
+          "day": 5,
+          "revenue": 5200,
+          "cost": 3200,
+          "netIncome": 2000
+        },
+        {
+          "id": 6,
+          "year": 2019,
+          "month": 0,
+          "day": 6,
+          "revenue": 6500,
+          "cost": 5000,
+          "netIncome": 1500
+        },
+        {
+          "id": 7,
+          "year": 2019,
+          "month": 0,
+          "day": 7,
+          "revenue": 6700,
+          "cost": 4500,
+          "netIncome": 2200
+        },
+        {
+          "id": 8,
+          "year": 2019,
+          "month": 0,
+          "day": 8,
+          "revenue": 7200,
+          "cost": 5000,
+          "netIncome": 2200
+        },
+        {
+          "id": 9,
+          "year": 2019,
+          "month": 0,
+          "day": 9,
+          "revenue": 5800,
+          "cost": 4200,
+          "netIncome": 1600
+        },
+        {
+          "id": 10,
+          "year": 2019,
+          "month": 0,
+          "day": 10,
+          "revenue": 5200,
+          "cost": 2000,
+          "netIncome": 3200
+        },
+        {
+          "id": 11,
+          "year": 2019,
+          "month": 0,
+          "day": 11,
+          "revenue": 6500,
+          "cost": 3000,
+          "netIncome": 3500
+        },
+        {
+          "id": 12,
+          "year": 2019,
+          "month": 0,
+          "day": 12,
+          "revenue": 6200,
+          "cost": 4990,
+          "netIncome": 1210
+        },
+        {
+          "id": 13,
+          "year": 2019,
+          "month": 0,
+          "day": 13,
+          "revenue": 2100,
+          "cost": 1400,
+          "netIncome": 700
+        },
+        {
+          "id": 14,
+          "year": 2019,
+          "month": 0,
+          "day": 14,
+          "revenue": 5600,
+          "cost": 4000,
+          "netIncome": 1600
+        },
+        {
+          "id": 15,
+          "year": 2019,
+          "month": 0,
+          "day": 15,
+          "revenue": 7600,
+          "cost": 4500,
+          "netIncome": 3100
+        },
+        {
+          "id": 16,
+          "year": 2019,
+          "month": 0,
+          "day": 16,
+          "revenue": 2700,
+          "cost": 1000,
+          "netIncome": 1700
+        }                       
+  ],
+  "orders":[
+    {
+      "id": 1,
+      "customer": "Ian Medina",
+      "pdtList": [
+        {
+          "name": "vestibulum",
+          "price": 1400,
+          "num": 1     
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        }
+      ],
+      "addTime": "2018/6/8 13:39",
+      "checkoutTime": "2018/6/8 20:23",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "paid"
+    },
+    {
+      "id": 2,
+      "customer": "Yao Tomas",
+      "pdtList": [
+        {
+          "name": "Trench Coats",
+          "price": 1076,
+          "num": 4     
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        }
+      ],
+      "addTime": "2018/7/8 12:00",
+      "checkoutTime": "2018/8/8 14:23",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "unpaid"
+    },
+    {
+      "id": 3,
+      "customer": "Anddy Roddick",
+      "pdtList": [
+        {
+          "name": "Sweaters Coats",
+          "price": 1414,
+          "num": 1     
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        }
+      ],
+      "addTime": "2018/10/21 21:04",
+      "checkoutTime": "2018/10/22 22:16",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "shipping"
+    },
+    {
+      "id": 4,
+      "customer": "rafar Nadal",
+      "pdtList": [
+        {
+          "name": "t-shirt",
+          "price": 1400,
+          "num": 1     
+        }
+      ],
+      "addTime": "2018/10/6 20:39",
+      "checkoutTime": "2018/10/8 11:23",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "done"
+    },
+    {
+      "id": 5,
+      "customer": "tim hardway",
+      "pdtList": [
+        {
+          "name": "t-shirt",
+          "price": 1400,
+          "num": 1     
+        }
+      ],
+      "addTime": "2018/12/4 21:20",
+      "checkoutTime": "2018/12/5 11:53",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "done"
+    },
+    {
+      "id": 6,
+      "customer": "rex wang",
+      "pdtList": [
+        {
+          "name": "sweater",
+          "price": 1200,
+          "num": 1     
+        },
+        {
+          "name": "paint",
+          "price": 800,
+          "num": 4
+        },
+        {
+          "name": "coat",
+          "price": 1820,
+          "num": 1
+        }
+      ],
+      "addTime": "2018/3/7 22:42",
+      "checkoutTime": "2018/3/10 23:09",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "paid"
+    },
+    {
+      "id": 7,
+      "customer": "Ian Medina",
+      "pdtList": [
+        {
+          "name": "vestibulum",
+          "price": 1400,
+          "num": 1     
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        }
+      ],
+      "addTime": "2018/6/8 13:39",
+      "checkoutTime": "2018/6/8 20:23",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "paid"
+    },
+    {
+      "id": 8,
+      "customer": "Yao Tomas",
+      "pdtList": [
+        {
+          "name": "Trench Coats",
+          "price": 1076,
+          "num": 4     
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        }
+      ],
+      "addTime": "2018/7/8 12:00",
+      "checkoutTime": "2018/8/8 14:23",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "unpaid"
+    },
+    {
+      "id": 9,
+      "customer": "Anddy Roddick",
+      "pdtList": [
+        {
+          "name": "Sweaters Coats",
+          "price": 1414,
+          "num": 1     
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        }
+      ],
+      "addTime": "2018/10/21 21:04",
+      "checkoutTime": "2018/10/22 22:16",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "shipping"
+    },
+    {
+      "id": 10,
+      "customer": "rafar Nadal",
+      "pdtList": [
+        {
+          "name": "t-shirt",
+          "price": 1400,
+          "num": 1     
+        }
+      ],
+      "addTime": "2018/10/6 20:39",
+      "checkoutTime": "2018/10/8 11:23",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "done"
+    },
+    {
+      "id": 11,
+      "customer": "tim hardway",
+      "pdtList": [
+        {
+          "name": "t-shirt",
+          "price": 1400,
+          "num": 1     
+        }
+      ],
+      "addTime": "2018/12/4 21:20",
+      "checkoutTime": "2018/12/5 11:53",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "done"
+    },
+    {
+      "id": 12,
+      "customer": "rex wang",
+      "pdtList": [
+        {
+          "name": "sweater",
+          "price": 1200,
+          "num": 1     
+        },
+        {
+          "name": "paint",
+          "price": 800,
+          "num": 4
+        },
+        {
+          "name": "coat",
+          "price": 1820,
+          "num": 1
+        }
+      ],
+      "addTime": "2018/3/7 22:42",
+      "checkoutTime": "2018/3/10 23:09",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "paid"
+    },
+    {
+      "id": 13,
+      "customer": "ryan Hong",
+      "pdtList": [        
+        {
+          "name": "paint",
+          "price": 800,
+          "num": 4
+        }        
+      ],
+      "addTime": "2018/5/12 21:22",
+      "checkoutTime": "2018/5/14 11:45",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "unpaid"
+    },
+    {
+      "id": 14,
+      "customer": "Ian Medina",
+      "pdtList": [
+        {
+          "name": "vestibulum",
+          "price": 1400,
+          "num": 1     
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        }
+      ],
+      "addTime": "2018/6/8 13:39",
+      "checkoutTime": "2018/6/8 20:23",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "paid"
+    },
+    {
+      "id": 15,
+      "customer": "Yao Tomas",
+      "pdtList": [
+        {
+          "name": "Trench Coats",
+          "price": 1076,
+          "num": 4     
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        }
+      ],
+      "addTime": "2018/7/8 12:00",
+      "checkoutTime": "2018/8/8 14:23",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "unpaid"
+    },
+    {
+      "id": 16,
+      "customer": "Anddy Roddick",
+      "pdtList": [
+        {
+          "name": "Sweaters Coats",
+          "price": 1414,
+          "num": 1     
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        }
+      ],
+      "addTime": "2018/10/21 21:04",
+      "checkoutTime": "2018/10/22 22:16",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "shipping"
+    },
+    {
+      "id": 17,
+      "customer": "rafar Nadal",
+      "pdtList": [
+        {
+          "name": "t-shirt",
+          "price": 1400,
+          "num": 1     
+        }
+      ],
+      "addTime": "2018/10/6 20:39",
+      "checkoutTime": "2018/10/8 11:23",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "done"
+    },
+    {
+      "id": 18,
+      "customer": "tim hardway",
+      "pdtList": [
+        {
+          "name": "t-shirt",
+          "price": 1400,
+          "num": 1     
+        }
+      ],
+      "addTime": "2018/12/4 21:20",
+      "checkoutTime": "2018/12/5 11:53",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "done"
+    },
+    {
+      "id": 19,
+      "customer": "rex wang",
+      "pdtList": [
+        {
+          "name": "sweater",
+          "price": 1200,
+          "num": 1     
+        },
+        {
+          "name": "paint",
+          "price": 800,
+          "num": 4
+        },
+        {
+          "name": "coat",
+          "price": 1820,
+          "num": 1
+        }
+      ],
+      "addTime": "2018/3/7 22:42",
+      "checkoutTime": "2018/3/10 23:09",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "paid"
+    },
+    {
+      "id": 20,
+      "customer": "Ian Medina",
+      "pdtList": [
+        {
+          "name": "vestibulum",
+          "price": 1400,
+          "num": 1     
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        }
+      ],
+      "addTime": "2018/6/8 13:39",
+      "checkoutTime": "2018/6/8 20:23",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "paid"
+    },
+    {
+      "id": 21,
+      "customer": "Yao Tomas",
+      "pdtList": [
+        {
+          "name": "Trench Coats",
+          "price": 1076,
+          "num": 4     
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        }
+      ],
+      "addTime": "2018/7/8 12:00",
+      "checkoutTime": "2018/8/8 14:23",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "unpaid"
+    },
+    {
+      "id": 22,
+      "customer": "Anddy Roddick",
+      "pdtList": [
+        {
+          "name": "Sweaters Coats",
+          "price": 1414,
+          "num": 1     
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        }
+      ],
+      "addTime": "2018/10/21 21:04",
+      "checkoutTime": "2018/10/22 22:16",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "shipping"
+    },
+    {
+      "id": 23,
+      "customer": "rafar Nadal",
+      "pdtList": [
+        {
+          "name": "t-shirt",
+          "price": 1400,
+          "num": 1     
+        }
+      ],
+      "addTime": "2018/10/6 20:39",
+      "checkoutTime": "2018/10/8 11:23",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "done"
+    },
+    {
+      "id": 24,
+      "customer": "tim hardway",
+      "pdtList": [
+        {
+          "name": "t-shirt",
+          "price": 1400,
+          "num": 1     
+        }
+      ],
+      "addTime": "2018/12/4 21:20",
+      "checkoutTime": "2018/12/5 11:53",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "done"
+    },
+    {
+      "id": 25,
+      "customer": "rex wang",
+      "pdtList": [
+        {
+          "name": "sweater",
+          "price": 1200,
+          "num": 1     
+        },
+        {
+          "name": "paint",
+          "price": 800,
+          "num": 4
+        },
+        {
+          "name": "coat",
+          "price": 1820,
+          "num": 1
+        }
+      ],
+      "addTime": "2018/3/7 22:42",
+      "checkoutTime": "2018/3/10 23:09",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "paid"
+    },
+    {
+      "id": 26,
+      "customer": "ryan Hong",
+      "pdtList": [        
+        {
+          "name": "paint",
+          "price": 800,
+          "num": 4
+        }        
+      ],
+      "addTime": "2018/5/12 21:22",
+      "checkoutTime": "2018/5/14 11:45",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "unpaid"
+    },
+    {
+      "id": 27,
+      "customer": "Anddy Roddick",
+      "pdtList": [
+        {
+          "name": "Sweaters Coats",
+          "price": 1414,
+          "num": 1     
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        }
+      ],
+      "addTime": "2018/10/21 21:04",
+      "checkoutTime": "2018/10/22 22:16",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "shipping"
+    },
+    {
+      "id": 28,
+      "customer": "rafar Nadal",
+      "pdtList": [
+        {
+          "name": "t-shirt",
+          "price": 1400,
+          "num": 1     
+        }
+      ],
+      "addTime": "2018/10/6 20:39",
+      "checkoutTime": "2018/10/8 11:23",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "done"
+    },
+    {
+      "id": 29,
+      "customer": "tim hardway",
+      "pdtList": [
+        {
+          "name": "t-shirt",
+          "price": 1400,
+          "num": 1     
+        }
+      ],
+      "addTime": "2018/12/4 21:20",
+      "checkoutTime": "2018/12/5 11:53",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "done"
+    },
+    {
+      "id": 30,
+      "customer": "rex wang",
+      "pdtList": [
+        {
+          "name": "sweater",
+          "price": 1200,
+          "num": 1     
+        },
+        {
+          "name": "paint",
+          "price": 800,
+          "num": 4
+        },
+        {
+          "name": "coat",
+          "price": 1820,
+          "num": 1
+        }
+      ],
+      "addTime": "2018/3/7 22:42",
+      "checkoutTime": "2018/3/10 23:09",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "paid"
+    },
+    {
+      "id": 31,
+      "customer": "ryan Hong",
+      "pdtList": [        
+        {
+          "name": "paint",
+          "price": 800,
+          "num": 4
+        }        
+      ],
+      "addTime": "2018/5/12 21:22",
+      "checkoutTime": "2018/5/14 11:45",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "unpaid"
+    },
+    {
+      "id": 32,
+      "customer": "Anddy Roddick",
+      "pdtList": [
+        {
+          "name": "Sweaters Coats",
+          "price": 1414,
+          "num": 1     
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        },{
+          "name": "yeallow coat",
+          "price": 1620,
+          "num": 3
+        }
+      ],
+      "addTime": "2018/10/21 21:04",
+      "checkoutTime": "2018/10/22 22:16",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "shipping"
+    },
+    {
+      "id": 33,
+      "customer": "rafar Nadal",
+      "pdtList": [
+        {
+          "name": "t-shirt",
+          "price": 1400,
+          "num": 1     
+        }
+      ],
+      "addTime": "2018/10/6 20:39",
+      "checkoutTime": "2018/10/8 11:23",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "done"
+    },
+    {
+      "id": 34,
+      "customer": "tim hardway",
+      "pdtList": [
+        {
+          "name": "t-shirt",
+          "price": 1400,
+          "num": 1     
+        }
+      ],
+      "addTime": "2018/12/4 21:20",
+      "checkoutTime": "2018/12/5 11:53",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "done"
+    },
+    {
+      "id": 35,
+      "customer": "rex wang",
+      "pdtList": [
+        {
+          "name": "sweater",
+          "price": 1200,
+          "num": 1     
+        },
+        {
+          "name": "paint",
+          "price": 800,
+          "num": 4
+        },
+        {
+          "name": "coat",
+          "price": 1820,
+          "num": 1
+        }
+      ],
+      "addTime": "2018/3/7 22:42",
+      "checkoutTime": "2018/3/10 23:09",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "paid"
+    },
+    {
+      "id": 36,
+      "customer": "ryan Hong",
+      "pdtList": [        
+        {
+          "name": "paint",
+          "price": 800,
+          "num": 4
+        }        
+      ],
+      "addTime": "2018/5/12 21:22",
+      "checkoutTime": "2018/5/14 11:45",
+      "Address": "386 Winder Drives Apt. 358",
+      "status": "unpaid"
+    }
+  ]
+}  

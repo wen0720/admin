@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin Order</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/m.min.css">
+</head>
+<body>
+    <div id="app" class="wrapper" @click="closeMenu">
+        <header>
+            <nav>                
+                <h1>Shoptime</h1>
+                <ul>                        
+                    <li><a href="./index.html">HOME</a></li>
+                    <li><a href="./order.html">ORDERS</a></li>
+                    <li><a href="./product.html">PRODUCT</a></li>
+                </ul>                
+                <div class="login"><a href="#">ADMIN</a></div>
+            </nav>
+        </header>
+        <div class="container">            
+            <div class="title">                
+                <div class="selectBox js-menu">                    
+                    <div class="check__txt">
+                        <input type="checkbox" id="all" name="all" value="" />
+                        <label for="all"><span class="margin0"></span></label>
+                        <div class="triDown dark"></div>
+                    </div>                     
+                    <ul class="menubox ulli left">
+                        <li>Select All</li>
+                        <li>Unselect All</li>
+                        <li>Paid</li>
+                        <li>Unpaid</li>
+                        <li>Shipping</li>
+                        <li>Done</li>
+                    </ul>
+                </div>                
+                <div class="fliter js-menu" @click.stop="openOrderSort">
+                    <div class="active dark">EDIT SECTION<div class="triDown dark"></div></div>
+                    <ul class="menubox check" :class="{active: checkTableBoxShow}">
+                        <li v-for="item in checkTableBox">
+                            <div class="check__txt">
+                                <input type="checkbox" :id="item.type" :name="item.type" value="" v-model="item.checked"/>
+                                <label :for="item.type"><span></span>
+                                    <p>{{ item.title }}</p>
+                                </label>
+                            </div>
+                        </li>       
+                    </ul>
+                </div>                
+            </div>
+            <div class="table">
+                <table class="table">
+                    <thead class="tableTitle style1">
+                        <tr>
+                            <th :style="{width: (initTableWidth[0] + nowPlusWidth) + 'px'}" v-show="checkTableStatus.customer.checked">Customer</th>
+                            <th :style="{width: (initTableWidth[1] + nowPlusWidth) + 'px'}" v-show="checkTableStatus.product.checked">Product list</th>
+                            <th :style="{width: (initTableWidth[2] + nowPlusWidth) + 'px'}" v-show="checkTableStatus.total.checked">Total</th>
+                            <th :style="{width: (initTableWidth[3] + nowPlusWidth) + 'px'}" v-show="checkTableStatus.addTime.checked">Add to Cart</th>
+                            <th :style="{width: (initTableWidth[4] + nowPlusWidth) + 'px'}" v-show="checkTableStatus.checkOutTime.checked">Check-out</th>
+                            <th :style="{width: (initTableWidth[5] + nowPlusWidth) + 'px'}" v-show="checkTableStatus.address.checked">Address</th>
+                            <th :style="{width: (initTableWidth[6] + nowPlusWidth) + 'px'}" v-show="checkTableStatus.status.checked">Status</th>
+                        </tr>                        
+                    </thead>
+                    <tbody>
+                        <!-- 如果直接將元件渲染到web上，browser會因為不認識<order-item> 
+                            而將<order-item>渲染在table之外，所以改用is-->                        
+                        <!-- ref 使我們可再父層使用子元素的方法 -->
+                        <tr is="order-item" 
+                            v-for="(item, idx) in orderFilter" 
+                            :key="item.id" 
+                            :info="item"     
+                            :check-table-status="checkTableStatus"                                                   
+                            v-on:open-menu="openMenu(idx)"
+                            v-on:close-menu="closeMenu"
+                            ref="itemMenu">                                        
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagelist">
+                <ul>
+                    <li><i class="fas fa-angle-double-left"></i></li>
+                    <li v-for="item in nowPageList" :class="{on: item === nowPage}" @click="changePage">{{ item }}</li>                    
+                    <li @click="nextPagePeriod"><i class="fas fa-angle-double-right"></i></li>
+                </ul>
+            </div>
+        </div>
+    </div> 
+    <!-- <template id="order-item">
+        <tr :class="infoItem.status">
+            <td v-if="checkTable.customer.checked">
+                <div class="check__txt">
+                    <input type="checkbox" :id="infoItem.id" :name="infoItem.id" value="" />
+                    <label :for="infoItem.id"><span class="bg-light"></span>                                        
+                        <p>{{infoItem.customer}}</p>
+                    </label>
+                </div>                                
+            </td>
+            <td v-if="checkTable.product.checked">
+                <ul class="tdlist">
+                    <li v-for="item in infoItem.pdtList">
+                        <p>{{ item.name }}</p>
+                        <p><span class="pd_price">{{'$' + item.price }}</span><span class="pd_num">{{ item.num }}</span></p>
+                    </li>                            
+                </ul>                                                                
+            </td>
+            <td class="js-total total" v-if="checkTable.total.checked"><p> {{ total }}</p></td>
+            <td v-if="checkTable.addTime.checked"><p>{{ infoItem.addTime }}</p></td>
+            <td v-if="checkTable.checkOutTime.checked"><p>{{ infoItem.checkoutTime }}</p></td>
+            <td v-if="checkTable.address.checked"><p>{{ infoItem.Address }}</p></td>
+            <td v-if="checkTable.status.checked" class="status js-status">
+                <div class="btn js-menu" :class="infoItem.status" @click.stop="open">
+                    <span class="js-menuTxt"> {{ infoItem.status }} </span>
+                    <div class="triDown light"></div>
+                    <ul class="menubox ulli left" :class="{active: menuboxShow}">
+                        <li @click.stop="changeMenuTxt">Paid</li>
+                        <li @click.stop="changeMenuTxt">Unpaid</li>
+                        <li @click.stop="changeMenuTxt">Shipping</li>
+                        <li @click.stop="changeMenuTxt">Done</li>                                                                                
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </template> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+    <!-- <script src="dist/bundle.js"></script> -->
+    <script>
+        // Object.defineProperty(vueOrderItem, 'checkTableArr', {
+        //     value: {
+        //                 ss: {},
+        //             },
+        //     writable: true
+        // });
+        const vueOrderItem = Vue.component('orderItem', {
+            data() {
+                return {
+                    menuboxShow: false,
+                    infoItem: this.info,
+                    // checkTableArr: this.checkTableStatus,                    
+                }
+            },
+            props:['info', 'checkTableStatus'],
+            computed: {
+                total(){                    
+                    return this.info.pdtList
+                    .map(item => item.price * item.num)
+                    .reduce((prev, curr) => prev + curr , 0)
+                },
+                // checkTable(){
+                //     let obj = {}
+                //     this.checkTableArr.forEach(item => {                        
+                //         obj[item.type] = { checked: item.checked };                        
+                //     })
+                //     return obj
+                // }
+            },
+            methods:{
+                open(){
+                    this.$emit('open-menu')
+                    this.menuboxShow = true;
+                },
+                close(){
+                    this.menuboxShow = false;
+                },
+                changeMenuTxt(e){                    
+                    this.infoItem.status = e.target.textContent.toLowerCase();   
+                    this.$emit('close-menu')                                  
+                }                
+            },
+            template: `
+                <tr :class="infoItem.status">
+                    <slot></slot>
+                    <td v-if="checkTableStatus.customer.checked">
+                        <div class="check__txt">
+                            <input type="checkbox" :id="infoItem.id" :name="infoItem.id" value="" />
+                            <label :for="infoItem.id"><span class="bg-light"></span>                                        
+                                <p>{{infoItem.customer}}</p>
+                            </label>
+                        </div>                                
+                    </td>
+                    <td v-if="checkTableStatus.product.checked">
+                        <ul class="tdlist">
+                            <li v-for="item in infoItem.pdtList">
+                                <p>{{ item.name }}</p>
+                                <p><span class="pd_price">{{'$' + item.price }}</span><span class="pd_num">{{ item.num }}</span></p>
+                            </li>                            
+                        </ul>                                                                
+                    </td>
+                    <td class="js-total total" v-if="checkTableStatus.total.checked"><p> {{ total }}</p></td>
+                    <td v-if="checkTableStatus.addTime.checked"><p>{{ infoItem.addTime }}</p></td>
+                    <td v-if="checkTableStatus.checkOutTime.checked"><p>{{ infoItem.checkoutTime }}</p></td>
+                    <td v-if="checkTableStatus.address.checked"><p>{{ infoItem.Address }}</p></td>
+                    <td v-if="checkTableStatus.status.checked" class="status js-status">
+                        <div class="btn js-menu" :class="infoItem.status" @click.stop="open">
+                            <span class="js-menuTxt"> {{ infoItem.status }} </span>
+                            <div class="triDown light"></div>
+                            <ul class="menubox ulli left" :class="{active: menuboxShow}">
+                                <li @click.stop="changeMenuTxt">Paid</li>
+                                <li @click.stop="changeMenuTxt">Unpaid</li>
+                                <li @click.stop="changeMenuTxt">Shipping</li>
+                                <li @click.stop="changeMenuTxt">Done</li>                                                                                
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            `
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                menuboxShow: [], 
+                order: [],
+                checkTableBoxShow: false,
+                checkTableBox:[
+                    {
+                        title: 'Customer',
+                        type: 'customer',
+                        checked: true,                        
+                    },
+                    {
+                        title: 'Product List',
+                        type: 'product',
+                        checked: true,                        
+                    },
+                    {
+                        title: 'Total',
+                        type: 'total',
+                        checked: true,                        
+                    },
+                    {
+                        title: 'Add to Cart',
+                        type: 'addTime',
+                        checked: true,                        
+                    },
+                    {
+                        title: 'Check-out',
+                        type: 'checkOutTime',
+                        checked: true,                        
+                    },
+                    {
+                        title: 'Address',
+                        type: 'address',
+                        checked: true,                        
+                    },
+                    {
+                        title: 'Status',
+                        type: 'status',
+                        checked: true,                        
+                    }
+                ],
+                initTableWidth: [162, 182, 83, 115, 115, 163, 144],                
+                nowPage: 1,                        
+                pageItemAmount: 7, // 每頁個數        
+                pageListAmount: 5, // 一次顯示幾頁的頁碼
+            },
+            computed:{
+                nowHideItemWidth(){
+                    return this.checkTableBox
+                            .map( (item, idx) => item.checked ? true : this.initTableWidth[idx])
+                            .filter(item => item !== true)                                            
+                            .reduce((prev, curr) => prev + curr , 0)                                    
+                },
+                nowHideItemAmount(){
+                    return this.checkTableBox.filter(item => item.checked === false).length
+                },
+                nowPlusWidth(){
+                    let width =  Math.floor(this.nowHideItemWidth / this.nowHideItemAmount)
+                    return isNaN(width) ? 0 : width
+                },
+                checkTableStatus(){
+                    let obj = {}
+                    this.checkTableBox.forEach(item => {                        
+                        obj[item.type] = { checked: item.checked };                        
+                    })
+                    return obj
+                },
+                orderFilter(){
+                    return this.order.slice(this.nowPage*this.pageItemAmount - this.pageItemAmount, this.nowPage*this.pageItemAmount)
+                },
+                totalPage(){
+                    return Math.ceil(this.order.length / this.pageItemAmount)
+                },
+                nowPageList(){
+                    let list = []
+                    let period = this.nowPage <= this.pageListAmount ? 0 : Math.ceil(this.nowPage / 5)                    
+                    for (let i=1; i<=this.pageListAmount; i++){
+                        list.push(this.pageListAmount*period + i)
+                    }
+                    return list
+                }
+            },
+            methods: {
+                // 元件$emit觸發的外層事件，idx是資料在order的索引值
+                openMenu(idx){        
+                    // 如果已經有打開的，在點擊其他的menu後，要把已打開的關起來
+                    let hadOpenIdx = this.menuboxShow.indexOf(true);
+                    if(hadOpenIdx > -1) this.closeMenu()
+
+                    // 在外層紀錄打開的menu為true
+                    this.menuboxShow[idx] = true;
+                },
+                closeMenu(){          
+                    // 找到目前在父層紀錄被打開的menu index
+                    let idx = this.menuboxShow.indexOf(true)                    
+                    if(idx > -1){                        
+                        this.menuboxShow[idx] = false    // 父層的紀錄也要一併修改
+                        // console.log(this.menuboxShow[idx])
+                        this.$refs.itemMenu[idx].close()
+                    }                 
+                    
+                    // 收合 EDIT SECTION
+                    if(this.checkTableBoxShow) this.checkTableBoxShow = false
+                },
+                openOrderSort(){                    
+                    this.checkTableBoxShow = true;
+                },
+                changePage(e){                    
+                    this.nowPage = Number(e.target.textContent)
+                },
+                nextPagePeriod(){
+                    console.log(1)
+                }
+            },
+            created(){
+                fetch('http://localhost:3000/orders')
+                .then(res => res.json())
+                .then(res => {
+                    this.order = res,
+                    this.order.forEach(item => {
+                        this.menuboxShow.push(false)
+                    });
+                }).catch(err => {
+                    console.log('err:', err)
+                })                
+            },
+            mounted(){
+                // alert('現在是mounted')                
+            }
+        })
+    </script>
+</body>
+</html>

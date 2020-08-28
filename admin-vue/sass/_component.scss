@@ -16,7 +16,8 @@ ul.menubox{
         padding: 10px 30px;
         text-align: center;
         color:#000;
-        cursor: pointer;        
+        cursor: pointer;     
+        min-width: 120px;   
     }   
     &.ulli{
         li:hover {
